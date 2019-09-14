@@ -33,3 +33,152 @@ and open the template in the editor.
     -webkit-transform: scale(1.01); /* Safari 3-8 */
     transform: scale(1.01); 
 }
+.side-bar {
+    border: 7px solid #f3f3f3;
+    padding: 15px;
+}
+.form-wrapper {
+    background: #f3f3f3;
+    line-height: 25px;
+    border: 1px solid #f3f3f3;
+    display: inline-block;
+    padding: 25px;
+    position: relative;
+    z-index: 0;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.sidebar-heading-center {
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.sidebar-heading, .sidebar-heading-center {
+    font-size: 16px;
+    color: #232323;
+    padding-bottom: 12px;
+    line-height: 28px;
+    margin-top: 0;
+    z-index: 1;
+}
+.p-l-10 {
+    padding-left: 10px!important;
+}
+.p-r-10 {
+    padding-right: 10px!important;
+}
+
+.floating-label {
+    -webkit-transform: translateY(-18px);
+    transform: translateY(-18px);
+    position: absolute;
+}
+label {
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 28px 0;
+    display: inline-block;
+}
+.form-control, label {
+    transition: all .3s cubic-bezier(.64,.09,.08,1);
+}
+
+input[type=datepicker], input[type=email], input[type=number], input[type=password], input[type=text], input[type=tel] {
+    position: relative;
+    margin-bottom: 10px;
+    border: 0;
+    padding: 10px 4px;
+    border-bottom: solid 1px #9b9b9b;
+    background: linear-gradient(to bottom,rgba(255,255,255,0) 96%,#e94350 96%);
+    background-position: -1920px 0;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+input[type=datepicker], input[type=email], input[type=number], input[type=password], input[type=text], input[type=tel], textarea {
+    width: 100%;
+    display: block;
+    will-change: background-position;
+    color: #333;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all .3s cubic-bezier(.64,.09,.08,1);
+    z-index: 2;
+}
+
+.p-r-0 {
+    padding-right: 0px!important;
+}
+.m-t-7 {
+    margin-top: 7px!important;
+}
+.country_code {
+    border-right: 1px solid #e6e6e6;
+}
+
+.form-control {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    width: 100%;
+    height: 39px;
+    display: block;
+    border: 0;
+    color: #333;
+    padding: 10px 0;
+    will-change: background-position;
+    background: linear-gradient(to bottom,rgba(255,255,255,0) 97%,#9b9b9b 97%);
+    background-position: -100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-size: 14px;
+    font-weight: 100;
+    -webkit-box-shadow: inset 0 0 0 rgba(0,0,0,.075);
+}
+
+.p-r-0 {
+    padding-right: 0px!important;
+}
+.m-t-7 {
+    margin-top: 7px!important;
+}
+.country_code {
+    border-right: 1px solid #e6e6e6;
+}
+
+
+.p-l-4 {
+    padding-left: 4px!important;
+}
+.floating-label {
+    -webkit-transform: translateY(-18px);
+    transform: translateY(-18px);
+    position: absolute;
+}
+
+.blog-date {
+    border: 3px solid #33a2d2;
+    text-align: center;
+    width: 70px;
+    margin: 5px;
+    border-radius: 3px;
+}
+.blog-date .bdate {
+    color: #333;
+    font-size: 16px;
+    padding: 6px 0;
+}
+.blog-date>span {
+    display: block;
+}
+.blog-date .byear {
+    background-color: #33a2d2;
+    border: 2px solid transparent;
+    color: #fff;
+    font-size: 12px;
+}
+.blog-date>span {
+    display: block;
+}
