@@ -1,0 +1,13 @@
+<br>
+Dear Sir/Madam,<br><br>Greetings!!!  
+<br><br>
+REFERENCE : $(_AR_)                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br>
+Please find the below updates from you for the enquiry $(_AR_)
+ <br><br>
+$(_ENQUIRY-BODY_)
+
+
+<br><br>
+Regards,<br>
+Team

@@ -1,0 +1,11 @@
+Dear Team,<br><br>
+Greeting from $(_AGENT_)!!!
+<br><br>
+AGENT REFERENCE : $(_AR_)                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br><br>
+    Kindly assist with the following enquiry
+<br><br>
+    $(_ENQUIRY-BODY_)<br><br>$(_URL_)
+Regards,<br>
+$(_LOGIN-USER_),<br>
+$(_AGENT_)<br>

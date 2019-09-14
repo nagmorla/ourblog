@@ -1,0 +1,25 @@
+SELECT * FROM dest_hotels WHERE DEST_ID=1 and upper(category)=upper('Budget')SELECT * FROM dest_hotels WHERE DEST_ID=2 and upper(category)=upper('Budget')SELECT * FROM dest_hotels WHERE DEST_ID=6 and upper(category)=upper('Budget')INSERT INTO enquiry_details (enquiry_type,createdby,agent_email,enquiry_id,client_name,email,mobile,travel_date,duration,adults,child_with_bed,child_with_no_bed,hotel_category,rooms_req,extra_beds,meal_plan,vehicle_type,start_point,end_point,destination) VALUES ('DT','1','arunprabhakar86@gmail.com','DT/1524310626000','a1a1a1a1','arunprabhakar.p@gmail.com','9963833933','2018-04-26','2','1','1','1','Budget','1','1','EP','SMALL BUDGET','1','4','Kerala')INSERT INTO enquiry_emails (enquiry_id,target,email_id,name,email_body,email_from,status) VALUES ('DT/1524310626000','V','arunprabhakar86@gmail.com','AAAA','Dear Team,<br><br>
+Greeting from Blue Escape!!!
+<br><br>
+AGENT REFERENCE : DT/1524310626000                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br><br>
+    Kindly assist with the following enquiry
+<br><br>
+    <table border=1><tr><td><b>Destination</b></td><td>Kerala</td><td><b>Travel Date</b></td><td>2018-04-26</td><td><b>Duration</b></td><td>2 Nights</td></tr><tr><td><b># OF Adults</b></td><td>1</td><td><b>Child With Bed</b></td><td>1</td><td><b>Child With No Bed</b></td><td>1</td></tr><tr><td><b>Hotel Category</b></td><td>Budget</td><td><b># OF Rooms</b></td><td>1</td><td><b>Meal Plan</b></td><td>EP</td></tr><tr><td><b>Trip Start Point</b></td><td>COCHIN</td><td><b>Trip End Point</b></td><td>KUMARAKOM</td><td><b>Vehicle Type</b></td><td>SMALL BUDGET</td></tr></table><br><br><table border=1><tr><td colspan=5 align=center><b>ITINERARY</b></td></tr><tr><td><b>Place</b></td><td><b>Hotel Name</b></td><td><b>Room Type</b></td><td><b>Meal Plan</b></td><td><b># Of Nights</b></td></tr><tr><td>COCHIN</td><td>THE FERN RESIDENCY</td><td>Delux</td><td>EP</td><td>1</td></tr><tr><td>MUNNAR</td><td>TALL TREES</td><td>Cottage</td><td>EP</td><td>1</td></tr></table><br><br><br><br><a href=http://travelagentims.com/s/v/vendor_enquiry_view.php?p1=DT/1524310626000&p2=YXJ1bnByYWJoYWthcjg2QGdtYWlsLmNvbQ==>Click here to Update Details</a><br><br>
+Regards,<br>
+anand,<br>
+Blue Escape<br>','INFO','1')
+INSERT INTO enquiry_emails (enquiry_id,target,email_id,name,email_body,email_from,status) VALUES ('DT/1524310626000','V','anandmca009@gmail.com','MMMMM','Dear Team,<br><br>
+Greeting from Blue Escape!!!
+<br><br>
+AGENT REFERENCE : DT/1524310626000                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br><br>
+    Kindly assist with the following enquiry
+<br><br>
+    <table border=1><tr><td><b>Destination</b></td><td>Kerala</td><td><b>Travel Date</b></td><td>2018-04-26</td><td><b>Duration</b></td><td>2 Nights</td></tr><tr><td><b># OF Adults</b></td><td>1</td><td><b>Child With Bed</b></td><td>1</td><td><b>Child With No Bed</b></td><td>1</td></tr><tr><td><b>Hotel Category</b></td><td>Budget</td><td><b># OF Rooms</b></td><td>1</td><td><b>Meal Plan</b></td><td>EP</td></tr><tr><td><b>Trip Start Point</b></td><td>COCHIN</td><td><b>Trip End Point</b></td><td>KUMARAKOM</td><td><b>Vehicle Type</b></td><td>SMALL BUDGET</td></tr></table><br><br><table border=1><tr><td colspan=5 align=center><b>ITINERARY</b></td></tr><tr><td><b>Place</b></td><td><b>Hotel Name</b></td><td><b>Room Type</b></td><td><b>Meal Plan</b></td><td><b># Of Nights</b></td></tr><tr><td>COCHIN</td><td>THE FERN RESIDENCY</td><td>Delux</td><td>EP</td><td>1</td></tr><tr><td>MUNNAR</td><td>TALL TREES</td><td>Cottage</td><td>EP</td><td>1</td></tr></table><br><br><br><br><a href=http://travelagentims.com/s/v/vendor_enquiry_view.php?p1=DT/1524310626000&p2=YW5hbmRtY2EwMDlAZ21haWwuY29t>Click here to Update Details</a><br><br>
+Regards,<br>
+anand,<br>
+Blue Escape<br>','INFO','1')
+INSERT INTO destination_master (type,destination,place) VALUES ('DH','APPPP','APPPP1')
+INSERT INTO dest_hotels (hotel_name,category,room_category,dest_id,type,dest_place) VALUES ('AA1','3Star','delux','36','DH','APPPP1')INSERT INTO destination_master (type,destination,place) VALUES ('DH','KIKIKI','KIKIKI')
+INSERT INTO dest_hotels (hotel_name,category,room_category,dest_id,type,dest_place) VALUES ('KIKIKI','3Star','special','37','DH','KIKIKI')SELECT * FROM dest_hotels WHERE DEST_ID=1 and upper(category)=upper('Budget')SELECT * FROM dest_hotels WHERE DEST_ID=2 and upper(category)=upper('Budget')

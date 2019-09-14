@@ -1,0 +1,15 @@
+<br>
+Dear Sir/Madam,<br><br>Greetings from $(_AGENT_)!!! 
+<br><br>
+AGENT REFERENCE : $(_AR_)                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br><br>
+Kindly review the itinerary below that we have created for your trip to $(_DESTINATION)). We encourage you to thoroughly review the information in this mail,<br>
+which presents a preliminary travel arrangement bases on the information you provided. With your feedback we will able to further refine your trip so that it flows to perfection.
+ <br><br>
+$(_ENQUIRY-BODY_)
+
+
+<br><br>
+Regards,<br>
+$(_LOGIN-USER_),<br>
+$(_AGENT_)<br>
