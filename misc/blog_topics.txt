@@ -1,0 +1,54 @@
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Algorithms Complexity in detail', 'Explain algoriths complexity in details by choosing 2 regresion methodologies', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Lenier Algorithms Complexity in detail', 'Explain linier algoriths complexity in details by choosing 2 any 2 methodologies', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Regression techniques in detail', 'Explain regressions in details in a orthodox way', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Basics of machine learning in detail', 'Explain machine learning basics and different use cases', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Machine learning need in current era', 'Explain need of machine learning in detail by taching any 2/3 domain issues', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Machine Learning transformations & ages', 'Machine Learning history and different engineers who put their salient efforts in it', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Machine Learning in medical science', 'Explain Machine Learning essentiality in medical science', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Machine Learning in Agriculture', 'How can Machine Learning help formers in getting good productivty and creation of wealth', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Machine Learning', 'Machine Learning in animal fertility', 'Explain how can Machine Learning helpsin animal health & new births empowerment', now(), 0, now(),0, 'Test Data');
+
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Algorithms Complexity in detail', 'Explain algoriths complexity in details by choosing 2 regresion methodologies', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Lenier Algorithms Complexity in detail', 'Explain linier algoriths complexity in details by choosing 2 any 2 methodologies', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Regression techniques in detail', 'Explain regressions in details in a orthodox way', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Basics of Data Science in detail', 'Explain Data Science basics and different use cases', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Data Science need in current era', 'Explain need of Data Science in detail by taching any 2/3 domain issues', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Data Science transformations & ages', 'Data Science history and different engineers who put their salient efforts in it', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Data Science in medical science', 'Explain Data Science essentiality in medical science', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Data Science in Agriculture', 'How can Data Science help formers in getting good productivty and creation of wealth', now(), 0, now(),0, 'Test Data');
+
+insert into blog_topics (category, subject, details, creation_date, created_by, update_date, updated_by, support_notes)
+values ('Data Science', 'Data Science in animal fertility', 'Explain how can Data Science helpsin animal health & new births empowerment', now(), 0, now(),0, 'Test Data');

@@ -1,16 +1,16 @@
 <?php
 require '../../lib/mysql.php';
 require '../m/Utils.php';
-require '../m/Clients.php';
+require '../m/Topics.php';
 require "../../vendor/autoload.php";
 
 
 $app = new Slim\App();
 
-//Get all clients
-$app->get('/getall', function ($request, $response, $args) { 
+//Get all topics
+$app->get('/getalltopics', function ($request, $response, $args) { 
     
-    getClientData();
+    getTopicsData();
 });
 
 $app->get('/getautocomp', function ($request, $response, $args) { 

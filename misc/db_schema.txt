@@ -1,0 +1,107 @@
+CREATE  TABLE BLOG_TOPICS (
+  topic_id INT NOT NULL AUTO_INCREMENT,
+  category VARCHAR(128),
+  subject VARCHAR(256) NOT NULL ,
+  details VARCHAR(1024) ,
+  creation_date DATE ,
+  created_by int ,
+  update_date DATE ,
+    updated_by int ,
+  support_notes VARCHAR(512) ,
+  PRIMARY KEY (topic_id) )
+ENGINE = InnoDB;
+
+CREATE  TABLE TOPICS_DISCUSSIONS (
+  `discussion_id` INT  AUTO_INCREMENT,
+  `topic_id` INT,
+  `type` VARCHAR(128) , -- Question/Reply/Feedback
+  `discussion_ref_id` int , -- discussion_id for which user replied.
+  `details` VARCHAR(1024) ,
+  `marked_by_admin` int , -- 0/1 Admin can mark a reply as most suitable answer for the topic.
+  `moderated_by_admin` int , -- 0/1 Admin should moderate a discussion then only it will be visible in the blog.
+  `creation_date` DATE ,
+  `created_by` int ,
+  `update_date` DATE ,
+    `updated_by` int ,
+  `support_notes` VARCHAR(512) ,
+  PRIMARY KEY (`discussion_id`) )
+ENGINE = InnoDB;
+
+
+CREATE  TABLE TOPICS_DISCUSSION_AUDITS (
+	`audit_id` INT  AUTO_INCREMENT,
+  `discussion_id` INT  ,
+  `moderated_by` int , -- Admin user id to track who has moderated it.
+  `creation_date` DATE ,
+  `created_by` int ,
+  `update_date` DATE ,
+    `updated_by` int ,
+  `support_notes` VARCHAR(512) ,
+  PRIMARY KEY (`audit_id`) )
+ENGINE = InnoDB;
+
+-- User & Role Management Objects
+create table user (
+usr_key int AUTO_INCREMENT,
+usr_email varchar(256),
+password varchar(256),
+usr_status varchar(56), -- Active/Locked/Deleted
+first_name varchar(128),
+last_name varchar(128),
+phone_number varchar(56),
+city varchar(128),
+`creation_date` DATE ,
+  `created_by` int ,
+  `update_date` DATE ,
+    `updated_by` int ,
+  `support_notes` VARCHAR(512) ,
+  PRIMARY KEY (`usr_key`) 
+);
+
+create table roles(
+role_key int AUTO_INCREMENT,
+role_name varchar(56),
+`creation_date` DATE ,
+  `created_by` int ,
+  `update_date` DATE ,
+    `updated_by` int ,
+  `support_notes` VARCHAR(512) ,
+  PRIMARY KEY (`role_key`) 
+);
+
+create table app_modules(
+module_key int AUTO_INCREMENT,
+module_name varchar(256),
+module_uri varchar(256),
+`creation_date` DATE ,
+  `created_by` int ,
+  `update_date` DATE ,
+    `updated_by` int ,
+  `support_notes` VARCHAR(512) ,
+  PRIMARY KEY (`module_key`) 
+);
+
+create table user_role_mapings(
+maping_key int AUTO_INCREMENT,
+usr_key int,
+role_key int,
+`creation_date` DATE ,
+  `created_by` int ,
+  `update_date` DATE ,
+    `updated_by` int ,
+  `support_notes` VARCHAR(512) ,
+  PRIMARY KEY (`maping_key`) 
+);
+
+create table role_module_mapings(
+maping_key int AUTO_INCREMENT,
+role_key int,
+module_key int,
+`creation_date` DATE ,
+  `created_by` int ,
+  `update_date` DATE ,
+    `updated_by` int ,
+  `support_notes` VARCHAR(512) ,
+  PRIMARY KEY (`maping_key`) 
+);
+

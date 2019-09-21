@@ -8,7 +8,7 @@
 require '../../lib/mysql.php';
 require 'Utils.php';
 
-$table_name="master_data";
+$table_name="blog_topics";
 
 
 function addType($data){
@@ -21,7 +21,7 @@ function addType($data){
         echo $id;
 }
 
-function getMasterData(){
+function getTopicsData(){
     global $table_name;
     $db = connect_db();
     $sql = "SELECT * FROM $table_name";
