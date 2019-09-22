@@ -34,6 +34,21 @@ function getTopicsData(){
     echo json_encode($data);
     
 }
+function getTopicDataById($tid){
+	global $table_name;
+    $db = connect_db();
+    $sql = "SELECT * FROM $table_name where topic_id=$tid";
+    $exe = $db->query($sql);
+  //  $data = $exe->fetch_all(MYSQLI_ASSOC);
+    while ($row = $exe->fetch_assoc()) {
+  $data[] = $row;
+}
+    $db = null;
+    echo json_encode($data);
+    
+	
+}
+
 
 function updateType($data){
     global $table_name;
