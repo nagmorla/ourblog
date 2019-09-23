@@ -1,0 +1,27 @@
+<div style="text-align: right;"><a href="#" onclick="gotoMain();">Goto Home</a></div>
+<div data-bind="foreach: {data: topics, as: 'topic'}" class="topics_cont">
+    <div style="" class="_topic">
+        <div class="col-md-2 col-xs-3 p-0">
+            <div class="blog-date"> 
+                <span class="bdate" data-bind="html: t_day+'<BR>'+t_mon"></span>
+                <span class="byear" data-bind="html: t_year"></span> 
+            </div>
+        </div>
+        <div class="col-md-10">
+            <span data-bind="text: subject" style="font-weight: 600"> </span><BR>
+            <span data-bind="text: content"> </span><BR>
+        </div>
+    </div>
+</div>
+<div data-bind="foreach: {data: details, as: 'detail'}" class="topics_cont" style="margin-left: 2%;">
+    <div style="" class="_detail">
+        <div class="col-md-2 col-xs-3 p-0">
+            <div> 
+                <span data-bind="html: discussion_date"></span>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <span data-bind="text: details"> </span><BR>
+        </div>
+    </div>
+</div>
