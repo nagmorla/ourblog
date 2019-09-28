@@ -15,6 +15,12 @@ and open the template in the editor.
     overflow: auto;
 }
 
+.topics_detail{
+    height: 100%;
+    animation: fadeEffect 0.5s;
+    overflow: auto;
+}
+
 ._topic{
     margin-left: auto;
     margin-right: auto;
@@ -33,6 +39,21 @@ and open the template in the editor.
     -webkit-transform: scale(1.01); /* Safari 3-8 */
     transform: scale(1.01); 
 }
+
+._detail{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:1.5%; 
+    background: whitesmoke;
+    border: 1px solid #dddfe2; 
+    border-radius: 4px; 
+    overflow: hidden; 
+    box-shadow: 2px 3px 2px 2px #888888;
+    transition: transform .2s;
+    width: 99%;    
+    padding: 10px;
+}
+
 .side-bar {
     border: 7px solid #f3f3f3;
     padding: 15px;

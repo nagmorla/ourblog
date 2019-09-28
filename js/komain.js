@@ -21,16 +21,16 @@ function HomeModel() {
         console.log('Inside nested function :: ' + JSON.stringify(data));
         $('#topic_details').show();
         $('#Home_Screen').hide();
-        model2.addTopic(data);
+        topicDetailsModel.addTopic(data);
     };
 }
 
-var model1 = new HomeModel();
+var topicsMainModel = new HomeModel();
 
 $('#topics_column').load("topics_main.html", function (data) {
     console.log('Topics main page is loaded into page.');
     console.log('Applying Bindings to Home Screen');
-    ko.applyBindings(model1, document.getElementById('Home_Screen'));
+    ko.applyBindings(topicsMainModel, document.getElementById('Home_Screen'));
     console.log('Bindings Applied to Home Screen');
 
 });
@@ -40,42 +40,65 @@ function TopicDetails() {
     var self = this;
     self.topics = ko.observableArray([]);
     self.details = ko.observableArray([]);
+    self.topic_id = ko.observable();
+    self.maxDescussionId = 1;
+
     self.addTopic = function (topic) {
         self.topics.removeAll();
         self.topics.push(topic);
-        self.pullDetails(topic.topic_id);
+        self.topic_id(topic.topic_id);
+        var currentDescId = self.pullDetails(topic.topic_id);
+        self.maxDescussionId = currentDescId + 1;
+//        $.getJSON('');
+
     };
+    self.submitReply = function () {
+        var replyContent = tinyMCE.get('topic_detail_feedback').getContent();
+        console.log(JSON.stringify(replyContent));
+        tinyMCE.get('topic_detail_feedback').setContent('');
+        var detail;
+        detail = {'discussion_id': self.maxDescussionId, 'topic_id': self.topic_id(), 'type': 'REPLY', 'written_by': 'Anonimous User', 'discussion_ref_id': '',
+            'details': replyContent,
+            'marked_by_admin': '0', 'discussion_date': '2019-09-17'};
+        self.details.push(detail);
+    };
+
 
     self.pullDetails = function (id) {
         console.log('Pulling details for topic ... ' + id);
         self.details.removeAll();
+        var detailsId = 0;
         var detail;
-        detail = {'discussion_id': '2002', 'topic_id': id, 'type': 'REPLY', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-17'};
+        detail = {'discussion_id': '2002', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Soumya Rathod', 'discussion_ref_id': '',
+            'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.<br>Form controls automatically receive some global styling with Bootstrap: All textual &lt;input&gt;, &lt;textarea&gt;, and &lt;select&gt; elements with class .form-control have a width of 100%.',
+            'marked_by_admin': '0', 'discussion_date': '2019-09-17'};
         self.details.push(detail);
-        detail = {'discussion_id': '2003', 'topic_id': id, 'type': 'REPLY', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-18'};
+        detail = {'discussion_id': '2003', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Mangulya Rathod', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-18'};
         self.details.push(detail);
-        detail = {'discussion_id': '2004', 'topic_id': id, 'type': 'REPLY', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-19'};
+        detail = {'discussion_id': '2004', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Sarath Yadhav', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-19'};
         self.details.push(detail);
-        detail = {'discussion_id': '2005', 'topic_id': id, 'type': 'REPLY', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-22'};
+        detail = {'discussion_id': '2005', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Chilboo Pandye', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-22'};
         self.details.push(detail);
-        detail = {'discussion_id': '2006', 'topic_id': id, 'type': 'REPLY', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-23'};
+        detail = {'discussion_id': '2006', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Shankar Deva', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-23'};
         self.details.push(detail);
-        detail = {'discussion_id': '2007', 'topic_id': id, 'type': 'REPLY', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-17'};
+        detail = {'discussion_id': '2007', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Ayodhya Kumari', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-17'};
         self.details.push(detail);
-        detail = {'discussion_id': '2008', 'topic_id': id, 'type': 'REPLY', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-20'};
+        detail = {'discussion_id': '2008', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Soumya Rathod', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-20'};
         self.details.push(detail);
-        detail = {'discussion_id': '2009', 'topic_id': id, 'type': 'REPLY', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-17'};
+        detail = {'discussion_id': '2009', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Shahanaz Keriz', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-17'};
         self.details.push(detail);
+        detailsId = detail.discussion_id;
+        return detailsId;
     };
 }
 
-var model2 = new TopicDetails();
+var topicDetailsModel = new TopicDetails();
 
 
 $('#topic_details').load("topics_details.html", function (data) {
     console.log('Topics details page is loaded into page.');
     console.log('Applying Bindings to Topic Details');
-    ko.applyBindings(model2, document.getElementById('topic_details'));
+    ko.applyBindings(topicDetailsModel, document.getElementById('topic_details'));
     console.log('Bindings Applied to Topic Details');
 
 });

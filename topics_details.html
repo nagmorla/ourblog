@@ -8,20 +8,26 @@
             </div>
         </div>
         <div class="col-md-10">
-            <span data-bind="text: subject" style="font-weight: 600"> </span><BR>
-            <span data-bind="text: content"> </span><BR>
+            <span data-bind="html: subject" style="font-weight: 600"> </span><BR>
+            <span data-bind="html: content"> </span><BR>
         </div>
     </div>
 </div>
-<div data-bind="foreach: {data: details, as: 'detail'}" class="topics_cont" style="margin-left: 2%;">
+<div data-bind="foreach: {data: details, as: 'detail'}" class="topics_detail" style="margin-left: 2%;">
     <div style="" class="_detail">
-        <div class="col-md-2 col-xs-3 p-0">
-            <div> 
-                <span data-bind="html: discussion_date"></span>
-            </div>
+        <div style="width: 95%;"> 
+            <span data-bind="html: '<b>'+written_by+'</b> says:' " style="float: left"></span>
+            <BR>
+            <span data-bind="html: '<i> on '+discussion_date+' :</i>'" style="float: left"></span>
+            <BR>
         </div>
-        <div class="col-md-10">
-            <span data-bind="text: details"> </span><BR>
+        <div>
+            <span data-bind="html: details"> </span><BR>
         </div>
     </div>
+</div>
+<div style=" margin-left: 2%;">
+    <span>Reply:</span>
+    <textarea id="topic_detail_feedback"></textarea>
+    <button data-bind="click: submitReply">Submit</button>
 </div>
