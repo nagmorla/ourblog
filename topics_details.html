@@ -22,11 +22,32 @@
             <BR>
         </div>
         <div>
+            <!-- ko if: marked_by_admin == '0'-->
             <span data-bind="html: details"> </span><BR>
+            <!-- /ko -->
+            <!-- ko if: marked_by_admin == '1' -->
+            <span data-bind="html: details" style="color: deepskyblue; font-weight: 600;"> </span><BR>
+            <!-- /ko -->
+            <a href="#SUB_REPLY_DIV" style="float: right; margin-right: 2%; font-weight: 600; font-style: italic;"><span>REPLY</span></a>
+        </div>
+    </div>
+    <div class="inner_details">
+        <div data-bind="foreach: innerDetails" class="topics_detail" style="margin-left: 2%;">
+            <div style="" class="_detail">
+                <div style="width: 95%;"> 
+                    <span data-bind="html: '<b>'+written_by+'</b> says:' " style="float: left"></span>
+                    <BR>
+                    <span data-bind="html: '<i> on '+discussion_date+' :</i>'" style="float: left"></span>
+                    <BR>
+                </div>
+                <div>
+                    <span data-bind="html: details"> </span><BR>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div style=" margin-left: 2%;">
+<div style=" margin-left: 2%;" id="SUB_REPLY_DIV">
     <span>Reply:</span>
     <textarea id="topic_detail_feedback"></textarea>
     <button data-bind="click: submitReply">Submit</button>
