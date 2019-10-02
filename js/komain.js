@@ -1,35 +1,141 @@
 function HomeModel() {
     var self = this;
+    self.masterTopics = [];
     self.topics = ko.observableArray([]);
-    var topic = {'topic_id': '27', 'subject': 'Artificial Inteligence :: Robot is very dangorous',
-        'content': 'A robot is a machine—especially one programmable by a computer— capable of carrying out a complex series of actions automatically. ',
-        't_day': '12',
-        't_mon': 'Sep',
-        't_year': '2019'
-    };
-    self.topics.push(topic);
+    self.categories = ko.observableArray([]);
 
-    topic = {'topic_id': '36', 'subject': 'Machine Learning:: Linear regression is difficult to understand',
-        'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-        't_day': '13',
-        't_mon': 'Sep',
-        't_year': '2019'
+    self.pullTopics = function () {
+        var topic = {'topic_id': '27', 'subject': 'Artificial Inteligence :: Robot is very dangorous',
+            'category': 'DataScience',
+            'content': 'A robot is a machine—especially one programmable by a computer— capable of carrying out a complex series of actions automatically. ',
+            't_day': '12',
+            't_mon': 'Sep',
+            't_year': '2019'
+        };
+        self.topics.push(topic);
+        self.masterTopics.push(topic);
+
+        topic = {'topic_id': '36', 'subject': 'Machine Learning:: Linear regression is difficult to understand',
+            'category': 'MachineLearning',
+            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
+            't_day': '13',
+            't_mon': 'Sep',
+            't_year': '2019'
+        };
+        self.topics.push(topic);
+        self.masterTopics.push(topic);
+
+        topic = {'topic_id': '37', 'subject': 'Machine Learning:: Linear regression 2',
+            'category': 'Hadoop',
+            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
+            't_day': '14',
+            't_mon': 'Sep',
+            't_year': '2019'
+        };
+        self.topics.push(topic);
+        self.masterTopics.push(topic);
+
+        topic = {'topic_id': '38', 'subject': 'Machine Learning:: Linear regression 3',
+            'category': 'DataScience',
+            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
+            't_day': '15',
+            't_mon': 'Sep',
+            't_year': '2019'
+        };
+        self.topics.push(topic);
+        self.masterTopics.push(topic);
+
+        topic = {'topic_id': '39', 'subject': 'Machine Learning:: Linear regression 4',
+            'category': 'Spark',
+            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
+            't_day': '18',
+            't_mon': 'Sep',
+            't_year': '2019'
+        };
+        self.topics.push(topic);
+        self.masterTopics.push(topic);
+
+        topic = {'topic_id': '40', 'subject': 'Machine Learning:: Linear regression 5',
+            'category': 'MachineLearning',
+            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
+            't_day': '19',
+            't_mon': 'Oct',
+            't_year': '2019'
+        };
+        self.topics.push(topic);
+        self.masterTopics.push(topic);
     };
-    self.topics.push(topic);
+
+    self.pullCatogories = function () {
+        self.categories.push({'key': 'DataScience', 'value': 'Data Science'});
+        self.categories.push({'key': 'MachineLearning', 'value': 'Machine Learning'});
+        self.categories.push({'key': 'ArtificialIntelligence', 'value': 'Artificial Intelligence'});
+        self.categories.push({'key': 'Grafana', 'value': 'Grafana'});
+        self.categories.push({'key': 'Tabview', 'value': 'Tabview'});
+        self.categories.push({'key': 'Spark', 'value': 'Spark'});
+    };
 
     self.gotoTopic = function (data) {
         $('#topic_details').show();
         $('#Home_Screen').hide();
         topicDetailsModel.addTopic(data);
     };
+
+    self.submitPost = function () {
+        console.log('Submit Post');
+    };
+
+    self.searchTopics = function () {
+        console.log('Search Post');
+        var filter = document.getElementById('topics_search_filter').value;
+        var totalTopics = self.masterTopics.length;
+        self.topics.removeAll();
+        for (var i = 0; i < totalTopics; i++) {
+            var topic = self.masterTopics[i];
+            if (topic.subject.toUpperCase().indexOf(filter.toUpperCase()) >= 0
+                    || topic.category.toUpperCase().indexOf(filter.toUpperCase()) >= 0
+                    || topic.content.toUpperCase().indexOf(filter.toUpperCase()) >= 0) {
+//                console.log('Pushing ..."' + topic.subject.toUpperCase().indexOf(filter.toUpperCase()) + '||' + topic.category.toUpperCase().indexOf(filter.toUpperCase()) + '||' + topic.content.toUpperCase().indexOf(filter.toUpperCase()) + '", Filter:' + filter);
+                self.topics.push(topic);
+            }
+        }
+    };
+
+
+    self.searchCategory = function (data, event) {
+        var target = event.currentTarget;
+        var filter = target.toString().split("#")[1];
+//        console.log('Filter:' + filter);
+        var totalTopics = self.masterTopics.length;
+        self.topics.removeAll();
+        for (var i = 0; i < totalTopics; i++) {
+            var topic = self.masterTopics[i];
+            if ((topic.category.toUpperCase().indexOf(filter.toUpperCase()) >= 0) || filter == 'ALL') {
+//                console.log('Pushing ..."' + topic.subject.toUpperCase().indexOf(filter.toUpperCase()) + '||' + topic.category.toUpperCase().indexOf(filter.toUpperCase()) + '||' + topic.content.toUpperCase().indexOf(filter.toUpperCase()) + '", Filter:' + filter);
+                self.topics.push(topic);
+            }
+        }
+    };
+
 }
 
-var topicsMainModel = new HomeModel();
 
-$('#topics_column').load("topics_main.html", function (data) {
+
+var topicsMainModel = new HomeModel();
+topicsMainModel.pullTopics();
+topicsMainModel.pullCatogories();
+
+$('#topics_column').load("topics_main.php", function (data) {
     console.log('Topics main page is loaded into page.');
+
+    tinymce.init({selector: '#new_topic',
+        plugins: "image",
+        menubar: ["file", "edit", "view", "insert"]
+    });
+    console.log('TinyMCE is initialized for new post creation');
+
     console.log('Applying Bindings to Home Screen');
-    ko.applyBindings(topicsMainModel, document.getElementById('Home_Screen'));
+    ko.applyBindings(topicsMainModel, document.getElementById('topics_column'));
     console.log('Bindings Applied to Home Screen');
 
 });
@@ -60,12 +166,26 @@ function TopicDetails() {
 
     self.submitReply = function () {
         var replyContent = tinyMCE.get('topic_detail_feedback').getContent();
-        console.log(JSON.stringify(replyContent));
+        var type = document.getElementById('des_type').value;
+        console.log(JSON.stringify(replyContent) + ', Type:' + type);
         tinyMCE.get('topic_detail_feedback').setContent('');
+        var loginUser = document.getElementById('login_user').value;
         var detail;
-        detail = {'discussion_id': self.maxDescussionId, 'topic_id': self.topic_id(), 'type': 'REPLY', 'written_by': 'Anonimous User', 'discussion_ref_id': '',
+        var date = new Date();
+        var month = date.getMonth() + 1;
+        var mon = month.toString();
+        if (mon.length == 1) {
+            mon = '0' + mon;
+        }
+        var day = (date.getDate()).toString();
+        if (day.length == 1) {
+            day = '0' + day;
+        }
+        detail = {'discussion_id': self.maxDescussionId, 'topic_id': self.topic_id(), 'type': type.toUpperCase(),
+            'written_by': loginUser, 'discussion_ref_id': '',
             'details': replyContent,
-            'marked_by_admin': '0', 'discussion_date': '2019-09-17'};
+            'marked_by_admin': '0', 'discussion_date': (date.getFullYear() + '-' + mon + '-' + day)
+            , innerDetails: []};
         self.details.push(detail);
     };
 
@@ -145,8 +265,13 @@ function TopicDetails() {
 var topicDetailsModel = new TopicDetails();
 var detailsDataPrepared = false;
 function loadTopicDetailsPage() {
-    $('#topic_details').load("topics_details.html", function (data) {
+    $('#topic_details').load("topics_details.php", function (data) {
         console.log('Topics details page is loaded into page.');
+        tinymce.init({selector: '#topic_detail_feedback',
+            plugins: "image",
+            menubar: ["file", "edit", "view", "insert"]
+        });
+        console.log('TinyMCE is initialized for descussions');
         applyTopicDetailsBinding();
     });
 }
@@ -169,6 +294,7 @@ function resetTimer() {
 
 $('#_othercontrolls').load("othercontrols.html", function (data) {
     console.log('Other controlls also loaded into page.');
+    ko.applyBindings(topicsMainModel, document.getElementById('_othercontrolls'));
 });
 
 function applyTopicDetailsBinding() {
