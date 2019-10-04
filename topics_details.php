@@ -27,8 +27,9 @@
             <!-- /ko -->
             <!-- ko if: marked_by_admin == '0'-->
             <div style=" display: inline-block; width: 49%;">
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">Mark It</label>
+                <div class="checkbox" style="float: right;">
+                    <!--<label><input type="checkbox" data-bind="click: $parent.descussionMarked, attr: {id:discussion_id}" id="">Mark It</label>-->
+                    <label><input type="checkbox" onclick="descussionMarked(this);" data-bind=" attr: {id:discussion_id}" id="">Mark It</label>
                 </div>
             </div>
             <!-- /ko -->
