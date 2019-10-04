@@ -11,27 +11,67 @@
         <div class="col-md-10">
             <span data-bind="html: subject" style="font-weight: 600"> </span><BR>
             <span data-bind="html: content"> </span><BR>
+            <a href="#SUB_REPLY_DIV" onclick="parentReplyLinkClicked(this);" style="float: right; margin-right: 2%; font-weight: 600; font-style: italic;"><span>REPLY</span></a>
         </div>
     </div>
 </div>
 <div data-bind="foreach: {data: details, as: 'detail'}" class="topics_detail" style="margin-left: 2%;">
     <div style="" class="_detail">
-        <div style="width: 95%; display: inline-block">
-            <div style=" display: inline-block; width: 49%;">
+        <div style="width: 100%; display: inline-block">
+            <div style=" display: inline-block; width: 48%;">
                 <span data-bind="html: '<b>'+written_by+'</b> says:' " style="float: left"></span>
                 <BR>
                 <span data-bind="html: '<i> on '+discussion_date+' :</i>'" style="float: left"></span>
             </div>
-            <!-- ko if: marked_by_admin == '1'-->
-            <div style=" display: inline-block; width: 49%;"><span class="glyphicon glyphicon-ok" style="color:green; font-size:2em; float: right;"></span></div>
-            <!-- /ko -->
-            <!-- ko if: marked_by_admin == '0'-->
-            <div style=" display: inline-block; width: 49%;">
-                <div class="checkbox" style="float: right;">
-                    <!--<label><input type="checkbox" data-bind="click: $parent.descussionMarked, attr: {id:discussion_id}" id="">Mark It</label>-->
-                    <label><input type="checkbox" onclick="descussionMarked(this);" data-bind=" attr: {id:discussion_id}" id="">Mark It</label>
+            <?php
+            if ($adminUser == "1") {
+                ?>
+                <!-- ko if: marked_by_admin == '1'-->
+                <div style=" display: inline-block; width: 48%;">
+                    <div class="checkbox" style="float: right;">
+                        <label><input type="checkbox" checked="true" onclick="descussionMarked(this);" data-bind=" attr: {id:discussion_id}" id="">Mark It</label>
+                    </div>
                 </div>
-            </div>
+
+                <!-- /ko -->
+                <!-- ko if: marked_by_admin == '0'-->
+                <div style=" display: inline-block; width: 48%;">
+                    <div class="checkbox" style="float: right;">
+                        <label><input type="checkbox" onclick="descussionMarked(this);" data-bind=" attr: {id:discussion_id}" id="">Mark It</label>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <?php
+            } else {
+                ?>
+                <!-- ko if: marked_by_admin == '1'-->
+                <div style=" display: inline-block; width: 49%;"><span class="glyphicon glyphicon-ok" style="color:green; font-size:2em; float: right;"></span></div>
+                <!-- /ko -->
+                <!-- ko if: marked_by_admin == '0'-->
+                <!--<div style=" display: inline-block; width: 49%;">
+                    <div class="checkbox" style="float: right;">
+                        <label><input type="checkbox" onclick="descussionMarked(this);" data-bind=" attr: {id:discussion_id}" id="">Mark It</label>
+                    </div>
+                </div> -->
+                <!-- /ko -->
+                <?php
+            }
+            ?>
+
+            <!-- ko if: type == 'REPLY'-->
+            <div style=" display: inline-block; width: 2%; float: right;">
+                <label style="float: right; color: darkgreen; font-size: 5vh; font-family: serif;">A</label>
+            </div> 
+            <!-- /ko -->
+            <!-- ko if: type == 'QUESTION'-->
+            <div style=" display: inline-block; width: 2%; float: right;">
+                <label style="float: right; color: darkred; font-size: 5vh; font-family: serif;">Q</label>
+            </div> 
+            <!-- /ko -->
+            <!-- ko if: type == 'FEEDBACK'-->
+            <div style=" display: inline-block; width: 2%; float: right;">
+                <label style="float: right; color: blue; font-size: 5vh; font-family: serif;">F</label>
+            </div> 
             <!-- /ko -->
         </div>
         <div>
@@ -44,7 +84,7 @@
         </div>
         <div data-bind="foreach: innerDetails" class="topics_detail" style="margin-left: 2%;">
             <div style="" class="sub_detail">
-                <div style="width: 95%;"> 
+                <div style="width: 100%;"> 
                     <span data-bind="html: '<b>'+written_by+'</b> says:' " style="float: left"></span>
                     <BR>
                     <span data-bind="html: '<i> on '+discussion_date+' :</i>'" style="float: left"></span>
@@ -55,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <a href="#SUB_REPLY_DIV" style="float: right; margin-right: 2%; font-weight: 600; font-style: italic;"><span>REPLY</span></a>
+        <a href="#SUB_REPLY_DIV" data-bind="attr: {id: discussion_id}" onclick="discussionReplyLinkClicked(this);" style="float: right; margin-right: 2%; font-weight: 600; font-style: italic;"><span>REPLY</span></a>
     </div>
     <!--    <div class="inner_details">
             <div data-bind="foreach: innerDetails" class="topics_detail" style="margin-left: 2%;">
@@ -81,9 +121,9 @@
         <div id="SUB_REPLY_DIV" class="form-group" style="margin-bottom: 5px; ">
             <label for="des_type">Type:</label>
             <select class="form-control" id="des_type">
-                <option>Reply</option>
-                <option>Feedback</option>
-                <option>Question</option>
+                <option>REPLY</option>
+                <option>FEEDBACK</option>
+                <option>QUESTION</option>
             </select>
             <BR>
             <label for="topic_detail_feedback">Comment:</label>

@@ -224,13 +224,15 @@ topicsMainModel.loadTopicsForPage(1);
 
 $('#topics_column').load("topics_main.php", function (data) {
     console.log('Topics main page is loaded into page.');
-
-    tinymce.init({selector: '#new_topic',
-        plugins: "image",
-        menubar: ["file", "edit", "view", "insert"]
-    });
-    console.log('TinyMCE is initialized for new post creation');
-
+    try {
+        tinymce.init({selector: '#new_topic',
+            plugins: "image",
+            menubar: ["file", "edit", "view", "insert"]
+        });
+        console.log('TinyMCE is initialized for new post creation');
+    } catch (exp) {
+        console.error("Couldn't initialize tiny mce editor for topics. " + exp);
+    }
     console.log('Applying Bindings to Home Screen');
     ko.applyBindings(topicsMainModel, document.getElementById('topics_column'));
     console.log('Bindings Applied to Home Screen');
@@ -288,11 +290,12 @@ function TopicDetails() {
             day = '0' + day;
         }
         detail = {'discussion_id': self.maxDescussionId, 'topic_id': self.topic_id(), 'type': type.toUpperCase(),
-            'written_by': loginUser, 'discussion_ref_id': '',
+            'written_by': loginUser, 'discussion_ref_id': _replyDiscussionId,
             'details': replyContent,
             'marked_by_admin': '0', 'discussion_date': (date.getFullYear() + '-' + mon + '-' + day)
             , innerDetails: []};
         self.details.push(detail);
+//        $.post();
     };
 
 
@@ -314,10 +317,10 @@ function TopicDetails() {
         detail = {'discussion_id': '2005', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Chilboo Pandye', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-22'
             , innerDetails: []};
         self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2006', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Shankar Deva', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-23'
+        detail = {'discussion_id': '2006', 'topic_id': id, 'type': 'QUESTION', 'written_by': 'Shankar Deva', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-23'
             , innerDetails: []};
         self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2007', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Ayodhya Kumari', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '1', 'discussion_date': '2019-09-17'
+        detail = {'discussion_id': '2007', 'topic_id': id, 'type': 'FEEDBACK', 'written_by': 'Ayodhya Kumari', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '1', 'discussion_date': '2019-09-17'
             , innerDetails: []};
         self.tmpdetails.push(detail);
         detail = {'discussion_id': '2008', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Soumya Rathod', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-20'
@@ -356,7 +359,7 @@ function TopicDetails() {
             var child = childNodes[i];
             for (var j = 0; j < parentArrayLen; j++) {
                 var parent = self.details()[j];
-                console.log('Parent ID:' + parent.discussion_id + ', Child Ref ID:' + child.discussion_ref_id);
+//                console.log('Parent ID:' + parent.discussion_id + ', Child Ref ID:' + child.discussion_ref_id);
                 if (parent.discussion_id == child.discussion_ref_id) {
                     parent.innerDetails.push(child);
 //                    console.log('Pushed to parent:' + JSON.stringify(parent));
@@ -373,11 +376,15 @@ var detailsDataPrepared = false;
 function loadTopicDetailsPage() {
     $('#topic_details').load("topics_details.php", function (data) {
         console.log('Topics details page is loaded into page.');
-        tinymce.init({selector: '#topic_detail_feedback',
-            plugins: "image",
-            menubar: ["file", "edit", "view", "insert"]
-        });
-        console.log('TinyMCE is initialized for descussions');
+        try {
+            tinymce.init({selector: '#topic_detail_feedback',
+                plugins: "image",
+                menubar: ["file", "edit", "view", "insert"]
+            });
+            console.log('TinyMCE is initialized for descussions');
+        } catch (exp) {
+            console.error("Couldn't initialize tiny mce editor for discussions. " + exp);
+        }
         applyTopicDetailsBinding();
     });
 }
@@ -413,9 +420,22 @@ function applyTopicDetailsBinding() {
 
 descussionMarked = function (obj) {
     var checkboxId = obj.id;
-    console.log('Checkbox clicked...' + checkboxId);
     event.stopPropagation();
     var checkbox = document.getElementById(checkboxId);
-    console.log('Checked Val ::' + checkbox.checked);
-    console.log('Checked Val ::' + obj.value);
+    if (checkbox.checked == true) {
+        console.log('Checked Val :: TRUE');
+    } else {
+        console.log('Checked Val :: FALSE');
+    }
+//    $.post(URL, data, function(data){});
+};
+var _replyDiscussionId = '';
+discussionReplyLinkClicked = function (obj) {
+    console.log('Discussion reply clicked ::' + obj.id);
+    _replyDiscussionId = obj.id;
+};
+
+parentReplyLinkClicked = function (obj) {
+    console.log('Parent reply clicked ::' + obj.id);
+    _replyDiscussionId = '';
 };
