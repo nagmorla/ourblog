@@ -1,3 +1,5 @@
+var TOPICS_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/getalltopics';
+
 function HomeModel() {
     var self = this;
     self.masterTopics = [];
@@ -54,6 +56,35 @@ function HomeModel() {
 //self.fullName = ko.pureComputed(function() {
 //    return this.firstName() + " " + this.lastName();
 //}, this);
+
+    self.pullRealTopics = function () {
+        $.getJSON(TOPICS_URL, function (data) {
+            console.log('Topics pulled from real target::' + data.length);
+            var topic = '';
+            $.each(data, function (index, value) {
+                var creationD = value.creation_date.toString();
+                var date = creationD.split(" ")[0];
+                var time = creationD.split(" ")[1];
+                var d = new Date(date + "T" + time + "Z");
+                var sub = value.subject;
+                var cont = value.details;
+//                console.log('Subject BFR:' + sub);
+//                console.log('Subject AFR:' + myencode(sub));
+                topic = {'topic_id': value.topic_id,
+                    'subject': myencode(sub),
+                    'content': myencode(cont),
+                    'category': value.category,
+                    't_day': d.getDate(),
+                    't_mon': getMonthLabel(d.getMonth()),
+                    't_year': d.getFullYear()
+                };
+                self.masterTopics.push(topic);
+                self.categorizedTopics.push(topic);
+            });
+            topicsDataPrepared = true;
+            console.log('<<Topics Read Complete>>');
+        });
+    };
 
     self.pullTopics = function () {
         var topic = {'topic_id': '27', 'subject': 'Artificial Inteligence :: Robot is very dangorous',
@@ -218,27 +249,11 @@ function HomeModel() {
 
 
 var topicsMainModel = new HomeModel();
-topicsMainModel.pullTopics();
+//topicsMainModel.pullTopics();
+topicsMainModel.pullRealTopics();
 topicsMainModel.pullCatogories();
-topicsMainModel.loadTopicsForPage(1);
 
-$('#topics_column').load("topics_main.php", function (data) {
-    console.log('Topics main page is loaded into page.');
-    try {
-        tinymce.init({selector: '#new_topic',
-            plugins: "image",
-            menubar: ["file", "edit", "view", "insert"]
-        });
-        console.log('TinyMCE is initialized for new post creation');
-    } catch (exp) {
-        console.error("Couldn't initialize tiny mce editor for topics. " + exp);
-    }
-    console.log('Applying Bindings to Home Screen');
-    ko.applyBindings(topicsMainModel, document.getElementById('topics_column'));
-    console.log('Bindings Applied to Home Screen');
-
-});
-
+verifyTopicsLoaded(topicsMainModel);
 
 function TopicDetails() {
     var self = this;
@@ -388,21 +403,22 @@ function loadTopicDetailsPage() {
         applyTopicDetailsBinding();
     });
 }
-var timeOut;
+
+var topicDetailsTimer;
 
 function verifyDetailsLoaded(self) {
     if (detailsDataPrepared == true) {
         self.rearrangeDetails(self.tmpdetails);
         loadTopicDetailsPage();
     } else {
-        resetTimer();
+        resetTopicsTimer();
     }
 }
 
-function resetTimer() {
+function resetTopicsTimer() {
     console.log('Topic Details are not yet loaded ......');
-    clearTimeout(timeOut);
-    timeOut = setTimeout(verifyDetailsLoaded, 2000);
+    clearTimeout(topicDetailsTimer);
+    topicDetailsTimer = setTimeout(verifyDetailsLoaded, 2000);
 }
 
 $('#_othercontrolls').load("othercontrols.html", function (data) {
@@ -439,3 +455,41 @@ parentReplyLinkClicked = function (obj) {
     console.log('Parent reply clicked ::' + obj.id);
     _replyDiscussionId = '';
 };
+
+
+var topicsTimer;
+var topicsDataPrepared = false;
+function verifyTopicsLoaded(self) {
+    if (topicsDataPrepared === true) {
+        topicsMainModel.loadTopicsForPage(1);
+        loadTopicsMainPage();
+    } else {
+        resetTopicsTimer();
+    }
+}
+
+function resetTopicsTimer() {
+    console.log('Topic are not yet loaded ......');
+    clearTimeout(topicsTimer);
+    topicsTimer = setTimeout(verifyTopicsLoaded, 2000);
+}
+
+function loadTopicsMainPage() {
+    $('#topics_column').load("topics_main.php", function (data) {
+        console.log('Topics main page is loaded into page.');
+        try {
+            tinymce.init({selector: '#new_topic',
+                plugins: "image",
+                menubar: ["file", "edit", "view", "insert"]
+            });
+            console.log('TinyMCE is initialized for new post creation');
+        } catch (exp) {
+            console.error("Couldn't initialize tiny mce editor for topics. " + exp);
+        }
+        console.log('Applying Bindings to Home Screen');
+        ko.applyBindings(topicsMainModel, document.getElementById('topics_column'));
+        console.log('Bindings Applied to Home Screen');
+
+    });
+
+}

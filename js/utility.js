@@ -12,7 +12,21 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     gotoMain();
 });
 
-function gotoMain(){
+function gotoMain() {
     $('#topic_details').hide();
     $('#Home_Screen').show();
+}
+
+
+var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+function getMonthLabel(indx) {
+    return months[indx];
+}
+
+function mydecode(mystring) {
+    return mystring.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+}
+function myencode(mystring) {
+//    return mystring.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+    return mystring.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/\\&quot;/g, '"');
 }
