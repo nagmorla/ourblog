@@ -1,4 +1,5 @@
 var TOPICS_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/getalltopics';
+var CATEGORIES_URL = 'http://bethelinfotech.com/vcmspro/s/c/CommonCtrl.php/getallcategories';
 
 function HomeModel() {
     var self = this;
@@ -67,6 +68,9 @@ function HomeModel() {
                 var time = creationD.split(" ")[1];
                 var d = new Date(date + "T" + time + "Z");
                 var sub = value.subject;
+                if (sub == undefined || sub == 'undefined' || sub == '') {
+                    console.error('Empty subject in topic::' + value.topic_id);
+                }
                 var cont = value.details;
 //                console.log('Subject BFR:' + sub);
 //                console.log('Subject AFR:' + myencode(sub));
@@ -179,12 +183,19 @@ function HomeModel() {
     };
 
     self.pullCatogories = function () {
-        self.categories.push({'key': 'DataScience', 'value': 'Data Science'});
-        self.categories.push({'key': 'MachineLearning', 'value': 'Machine Learning'});
-        self.categories.push({'key': 'ArtificialIntelligence', 'value': 'Artificial Intelligence'});
-        self.categories.push({'key': 'Grafana', 'value': 'Grafana'});
-        self.categories.push({'key': 'Tabview', 'value': 'Tabview'});
-        self.categories.push({'key': 'Spark', 'value': 'Spark'});
+//        self.categories.push({'key': 'DataScience', 'value': 'Data Science'});
+//        self.categories.push({'key': 'MachineLearning', 'value': 'Machine Learning'});
+//        self.categories.push({'key': 'ArtificialIntelligence', 'value': 'Artificial Intelligence'});
+//        self.categories.push({'key': 'Grafana', 'value': 'Grafana'});
+//        self.categories.push({'key': 'Tabview', 'value': 'Tabview'});
+//        self.categories.push({'key': 'Spark', 'value': 'Spark'});
+
+        $.getJSON(CATEGORIES_URL, function (data) {
+            console.log('Categories pulled from real target::' + data.length);
+            $.each(data, function (index, value) {
+                self.categories.push({'key': value.category_name, 'value': value.category_name});
+            });
+        });
     };
 
     self.gotoTopic = function (data) {
@@ -392,10 +403,19 @@ function loadTopicDetailsPage() {
     $('#topic_details').load("topics_details.php", function (data) {
         console.log('Topics details page is loaded into page.');
         try {
-            tinymce.init({selector: '#topic_detail_feedback',
-                plugins: "image",
-                menubar: ["file", "edit", "view", "insert"]
-            });
+            tinyMCE.execCommand('mceRemoveEditor', false, 'topic_detail_feedback');
+            setTimeout(function () {
+                tinymce.init({selector: '#topic_detail_feedback',
+                    plugins: "image",
+                    menubar: ["file", "edit", "view", "insert"]
+                });
+            }, 2000);
+
+
+//            tinymce.init({selector: '#topic_detail_feedback',
+//                plugins: "image",
+//                menubar: ["file", "edit", "view", "insert"]
+//            });
             console.log('TinyMCE is initialized for descussions');
         } catch (exp) {
             console.error("Couldn't initialize tiny mce editor for discussions. " + exp);

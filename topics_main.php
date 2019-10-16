@@ -20,8 +20,7 @@
             </div>
             <div class="col-md-10">
                 <a href="#" data-bind="click: $parent.gotoTopic"><span data-bind="html: subject"> </span></a><BR>
-                <span data-bind="html: content"> </span><BR>
-                <!--<span>Hello<br>How are you?</span>-->
+                <!--<span data-bind="html: content"> </span><BR>-->
                 <div class="pull-right"> <a href="#" data-bind="click: $parent.gotoTopic">READ MORE...</a> </div>
             </div>
         </div>
