@@ -1,11 +1,23 @@
-insert into topics_discussions (topic_id, type, discussion_ref_id, details, marked_by_admin, moderated_by_admin, creation_date, created_by, update_date, updated_by, support_notes)
-values (36, 'REPLY', NULL, 'Algorithms are little complex if you dont put your heart though you put your brain. First feel the need and then try to understand and implement. If you go blindly behind any algorithm,it show starts to you.', 1, 1, now(), 0, now(),0, 'Test Data');
+INSERT INTO `blog_topics`( `category`, `subject`, `details`, `creation_date`, `update_date`) select trim(subject) as category,question as subject,explanation as details,now(),now() from wpus_mtouchquiz_question
 
-insert into topics_discussions (topic_id, type, discussion_ref_id, details, marked_by_admin, moderated_by_admin, creation_date, created_by, update_date, updated_by, support_notes)
-values (36, 'REPLY', NULL, 'Algorithms are very complex though you dont put your heart & brain. First feel the need and then try to understand and implement. If you go blindly behind any algorithm,it show starts to you.', 1, 1, now(), 0, now(),0, 'Test Data');
 
-insert into topics_discussions (topic_id, type, discussion_ref_id, details, marked_by_admin, moderated_by_admin, creation_date, created_by, update_date, updated_by, support_notes)
-values (36, 'REPLY', NULL, 'Algorithms are not at all complex though you don''t put either heart  OR brain. First feel the need and then try to understand and implement. If you go blindly behind any algorithm,it show starts to you.', 1, 1, now(), 0, now(),0, 'Test Data');
-
-insert into topics_discussions (topic_id, type, discussion_ref_id, details, marked_by_admin, moderated_by_admin, creation_date, created_by, update_date, updated_by, support_notes)
-values (36, 'REPLY', NULL, 'Algorithms are very confusing though you put your heart, brain, legs and neck. You must put your brain and see the hellinside it. First feel the need and then try to understand and implement. If you go blindly behind any algorithm,it show starts to you.', 1, 1, now(), 0, now(),0, 'Test Data');
+Engineering-Mathematics
+Software-Engineering
+Algorithms
+Aptitude
+Compiler-Design
+Computer-Networks
+Computer-Organization
+Data Science
+Data-Structures
+Database-Management-System
+Digital-Logic-Design
+Engineering-Mathematics
+HTML
+Machine Learning
+Operating-Systems
+Programming
+Programming-for-Output-Problems
+Software-Engineering
+Theory-of-Computation
+Web-Technologies
