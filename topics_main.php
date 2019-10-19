@@ -39,7 +39,7 @@
     <li class="next" id="pagination_next"><a href="#" data-bind="click: gotoNextPage">Next</a></li>
     <!-- /ko -->
 </ul>
-<div style="border: 1px solid; margin: 2px; border-radius: 5px; padding: 10px;">
+<div style="border: 1px solid; margin: 2px; border-radius: 5px; padding: 10px;" id="askQuestion">
     <?php
     if ($loginComplete == "1") {
         ?>
@@ -50,9 +50,9 @@
             <BR>
             <label for="topic_categories">Topic Category:</label>
             <input list=categories id="topic_categories" class="form-control">
-            <datalist id=categories>
-                <option value="Datascience"></option>
-                <option value="ML"></option>
+            <datalist id=categories data-bind="foreach: categories">
+                <!--<option value="Datascience"></option>-->
+                <option value="" data-bind="value: value"></option>
             </datalist>
             <BR>
             <label for="new_topic">Topic Content:</label>

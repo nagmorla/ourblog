@@ -1,5 +1,7 @@
 <?php
 
+$blogtitle = "Blog Title";
+$blogheading = "Blog Heading";
 //            echo 'Hai this is my first php application';
 session_start();
 $_SESSION['username'] = "ARUN";

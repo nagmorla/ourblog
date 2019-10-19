@@ -1,5 +1,5 @@
 <?php include("session_data.php"); ?>
-<div style="text-align: right;"><a href="#" onclick="gotoMain();">Goto Home</a></div>
+<div style="text-align: right;" id="home_screen_control"><a href="#" onclick="gotoMain();">Goto Home</a></div>
 <div data-bind="foreach: {data: topics, as: 'topic'}" class="topics_cont">
     <div style="" class="_topic">
         <div class="col-md-2 col-xs-3 p-0">

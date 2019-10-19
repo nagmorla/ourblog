@@ -1,14 +1,18 @@
 <?php include("session_data.php"); ?>
+<?php
+$home_screen_disabled = TRUE;
+$req_topic_id = "";
+if (isset($_GET['topic_id'])) {
+    $req_topic_id = $_GET['topic_id'];
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <title><?php echo $blogtitle; ?></title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>-->
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/knockout-3.5.0.js"></script>
@@ -26,6 +30,7 @@
         <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body>
+        <input type="hidden" id="topic_id" name="topic_id" value="<?= $req_topic_id ?>"/>
         <input type="hidden" id="login_user" name="login_user" value="<?= $username ?>"/>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
@@ -41,8 +46,7 @@
                     <?php
                     if ($loginComplete == "1") {
                         ?>
-                <!--                        <li><a href="#"><?php echo $username; ?></a></li>-->
-                        <li><a href="#askQuestion">Ask Question</a></li>
+                                        <!--                        <li><a href="#"><?php echo $username; ?></a></li>-->
                         <li style="margin-top: 8px;">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
@@ -69,7 +73,7 @@
             <div>
                 &nbsp;
             </div>
-            <div id="Home_Screen" style="margin-top: 50px !important;">
+            <div id="Home_Screen" style="margin-top: 50px !important; display: none;">
                 <div class="row">
                     <div class="col-md-9" id="topics_column">
 
@@ -80,21 +84,17 @@
 
                 </div>
             </div>
-            <div id="topic_details" style="margin-top: 3%; display: none;">
+            <div id="topic_details" style="margin-top: 3%;">
 
             </div>
-            <?php
-//            echo 'Hai this is my first php application';
-            $_SESSION['username'];
-            $_SESSION['login_complete'];
-            ?>
+
         </div>        
 
         <script src="https://cdn.tiny.cloud/1/9ko0ik0t36r5i3bne9h3j1w63jwm10tml8lhqoa51s85orm5/tinymce/5/tinymce.min.js"></script>
         <!--<script type="text/javascript" src="js/komain.js"></script>-->
         <script type="text/javascript" src="js/api_paths.js"></script>
-        <script type="text/javascript" src="js/topicsmodel.js"></script>
         <script type="text/javascript" src="js/discussionsmodel.js"></script>
+        <script type="text/javascript" src="js/discussion_directaccess.js"></script>
         <script type="text/javascript" src="js/utility.js"></script>
         <script>
 //            tinymce.init({selector: '#topic_detail_feedback',

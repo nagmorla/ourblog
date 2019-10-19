@@ -1,0 +1,13 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+
+
+var TOPICS_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/getalltopics';
+var CATEGORIES_URL = 'http://bethelinfotech.com/vcmspro/s/c/CommonCtrl.php/getallcategories';
+var DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/gettopicdisscbyid?tid={tid}';
+var POST_TOPIC_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/addtopic';
