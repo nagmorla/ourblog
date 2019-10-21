@@ -213,7 +213,7 @@ function HomeModel() {
         var replyContent = tinyMCE.get('new_topic').getContent();
         var category = document.getElementById('topic_categories').value;
         var subject = document.getElementById('topic_subject').value;
-        console.log(JSON.stringify(replyContent) + ', Category:' + category + ', Subject:' + subject);
+//        console.log(JSON.stringify(replyContent) + ', Category:' + category + ', Subject:' + subject);
         tinyMCE.get('new_topic').setContent('');
         var loginUser = document.getElementById('login_user').value;
 //        var postdata = '';
@@ -225,8 +225,9 @@ function HomeModel() {
         postdata.category = encodeURIComponent(category);
         postdata.subject = encodeURIComponent(subject);
         postdata.details = encodeURIComponent(replyContent);
-        console.log(postdata);
-        console.log(JSON.stringify(postdata));
+        postdata.created_by = encodeURIComponent(loginUser);
+//        console.log(postdata);
+//        console.log(JSON.stringify(postdata));
         $.post(POST_TOPIC_URL, 'myData=' + JSON.stringify(postdata), function (data) {
             console.log('Topic submitted successfully. ' + JSON.stringify(data));
         }).fail(function (data) {
@@ -323,7 +324,10 @@ function loadTopicsMainPage() {
         console.log('Topics main page is loaded into page.');
         try {
             tinymce.init({selector: '#new_topic',
-                plugins: "image",
+                plugins: "image,paste",
+                height: 300,
+                toolbar: "image,paste",
+                paste_data_images: true,
                 menubar: ["file", "edit", "view", "insert"]
             });
             console.log('TinyMCE is initialized for new post creation');

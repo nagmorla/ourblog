@@ -160,7 +160,10 @@ function loadTopicDetailsPage() {
             tinyMCE.execCommand('mceRemoveEditor', false, 'topic_detail_feedback');
             setTimeout(function () {
                 tinymce.init({selector: '#topic_detail_feedback',
-                    plugins: "image",
+                    plugins: "image,paste",
+                    height: 300,
+                    toolbar: "image,paste",
+                    paste_data_images: true,
                     menubar: ["file", "edit", "view", "insert"]
                 });
             }, 2000);

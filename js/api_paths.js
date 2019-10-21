@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 
-
-
-
 var TOPICS_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/getalltopics';
 var CATEGORIES_URL = 'http://bethelinfotech.com/vcmspro/s/c/CommonCtrl.php/getallcategories';
 var DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/gettopicdisscbyid?tid={tid}';
 var POST_TOPIC_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/addtopic';
+var GET_TOPIC_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/gettopicbyid?tid={tid}';
