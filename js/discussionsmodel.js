@@ -46,13 +46,22 @@ function TopicDetails() {
         if (day.length == 1) {
             day = '0' + day;
         }
-        detail = {'discussion_id': self.maxDescussionId, 'topic_id': self.topic_id(), 'type': type.toUpperCase(),
-            'written_by': loginUser, 'discussion_ref_id': _replyDiscussionId,
-            'details': replyContent,
-            'marked_by_admin': '0', 'discussion_date': (date.getFullYear() + '-' + mon + '-' + day)
-            , innerDetails: []};
-        self.details.push(detail);
-//        $.post();
+//        detail = {'discussion_id': self.maxDescussionId, 'topic_id': self.topic_id(), 'type': type.toUpperCase(),
+//            'written_by': loginUser, 'discussion_ref_id': _replyDiscussionId,
+//            'details': replyContent,
+//            'marked_by_admin': '0', 'discussion_date': (date.getFullYear() + '-' + mon + '-' + day)
+//            , innerDetails: []};
+//        self.details.push(detail);
+
+        detail = {'topic_id': self.topic_id(), 'type': type.toUpperCase(),
+            'written_by': encodeURIComponent(loginUser), 'discussion_ref_id': _replyDiscussionId,
+            'details': encodeURIComponent(replyContent),
+            'marked_by_admin': '0'};
+        $.post(POST_DISCUSSION_URL, 'myData=' + detail, function (data) {
+            console.log('Discussion posted to server. ' + JSON.stringify(data));
+        }).fail(function (data) {
+            console.error('Failed to post discussion to server.');
+        });
     };
 
 
@@ -210,13 +219,23 @@ descussionMarked = function (obj) {
     var checkboxId = obj.id;
     event.stopPropagation();
     var checkbox = document.getElementById(checkboxId);
+    var marked_by_admin = '0';
     if (checkbox.checked == true) {
         console.log('Checked Val :: TRUE');
+        marked_by_admin = '1';
     } else {
         console.log('Checked Val :: FALSE');
     }
-//    $.post(URL, data, function(data){});
+    var postdata = JSON.parse('{}');
+    postdata.discussion_id = checkboxId;
+    postdata.marked_by_admin = marked_by_admin;
+    $.post(MARK_DISCUSSION_URL, 'myData=' + JSON.stringify(postdata), function (data) {
+        console.log('Marked by admin carried to server. ' + JSON.stringify(data));
+    }).fail(function (data) {
+        console.error('Failed to carry marked by admin.');
+    });
 };
+
 var _replyDiscussionId = '';
 discussionReplyLinkClicked = function (obj) {
     console.log('Discussion reply clicked ::' + obj.id);

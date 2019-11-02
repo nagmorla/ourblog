@@ -9,3 +9,5 @@ var CATEGORIES_URL = 'http://bethelinfotech.com/vcmspro/s/c/CommonCtrl.php/getal
 var DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/gettopicdisscbyid?tid={tid}';
 var POST_TOPIC_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/addtopic';
 var GET_TOPIC_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/gettopicbyid?tid={tid}';
+var MARK_DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/admin_ctrl.php/markbyadmin';
+var POST_DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/postdiscussion';
