@@ -54,10 +54,10 @@ function TopicDetails() {
 //        self.details.push(detail);
 
         detail = {'topic_id': self.topic_id(), 'type': type.toUpperCase(),
-            'written_by': encodeURIComponent(loginUser), 'discussion_ref_id': _replyDiscussionId,
+            'created_by': encodeURIComponent(loginUser), 'discussion_ref_id': _replyDiscussionId,
             'details': encodeURIComponent(replyContent),
             'marked_by_admin': '0'};
-        $.post(POST_DISCUSSION_URL, 'myData=' + detail, function (data) {
+        $.post(POST_DISCUSSION_URL, 'myData=' + JSON.stringify(detail), function (data) {
             console.log('Discussion posted to server. ' + JSON.stringify(data));
         }).fail(function (data) {
             console.error('Failed to post discussion to server.');

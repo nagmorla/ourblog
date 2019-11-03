@@ -224,7 +224,8 @@ function HomeModel() {
         var postdata = JSON.parse('{}');
         postdata.category = encodeURIComponent(category);
         postdata.subject = encodeURIComponent(subject);
-        postdata.details = encodeURIComponent(replyContent);
+	//	replyContent=replyContent.replace(/"/g,"\\\"");
+        postdata.details = replyContent;
         postdata.created_by = encodeURIComponent(loginUser);
 //        console.log(postdata);
 //        console.log(JSON.stringify(postdata));
