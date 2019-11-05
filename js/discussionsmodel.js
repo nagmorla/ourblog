@@ -134,7 +134,7 @@ function TopicDetails() {
         self.details.removeAll();
         for (var i = 0; i < details.length; i++) {
             var det = details[i];
-            if (det.discussion_ref_id == '' || det.discussion_ref_id == undefined || det.discussion_ref_id == null) {
+            if (det.discussion_ref_id == '' || det.discussion_ref_id == undefined || det.discussion_ref_id == null || det.discussion_ref_id == '0') {
                 self.details.push(det);
             } else {
 //                console.log('This is inner detail..' + JSON.stringify(det));

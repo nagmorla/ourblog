@@ -30,3 +30,18 @@ function myencode(mystring) {
 //    return mystring.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
     return mystring.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/\\&quot;/g, '"');
 }
+function addslashes( str ) {  
+    // Escapes single quote, double quotes and backslash characters in a string with backslashes    
+    //   
+    // version: 810.114  
+    // discuss at: http://phpjs.org/functions/addslashes  
+    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)  
+    // +   improved by: Ates Goral (http://magnetiq.com)  
+    // +   improved by: marrtins  
+    // +   improved by: Nate  
+    // +   improved by: Onno Marsman  
+    // *     example 1: addslashes("kevin's birthday");  
+    // *     returns 1: 'kevin\'s birthday'  
+   
+    return (str+'').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");  
+}  
