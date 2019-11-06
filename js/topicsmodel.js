@@ -61,11 +61,14 @@ function HomeModel() {
 //    return this.firstName() + " " + this.lastName();
 //}, this);
 
+    
     self.pullRealTopics = function () {
         $.getJSON(TOPICS_URL, function (data) {
             console.log('Topics pulled from real target::' + data.length);
             var topic = '';
+            g_topicsCount = 0;
             $.each(data, function (index, value) {
+                g_topicsCount = g_topicsCount + 1;
                 var creationD = value.creation_date.toString();
                 var date = creationD.split(" ")[0];
                 var time = creationD.split(" ")[1];
@@ -224,12 +227,13 @@ function HomeModel() {
         var postdata = JSON.parse('{}');
         postdata.category = encodeURIComponent(category);
         postdata.subject = encodeURIComponent(subject);
-	//	replyContent=replyContent.replace(/"/g,"\\\"");
+        //	replyContent=replyContent.replace(/"/g,"\\\"");
         postdata.details = replyContent;
         postdata.created_by = encodeURIComponent(loginUser);
 //        console.log(postdata);
 //        console.log(JSON.stringify(postdata));
         $.post(POST_TOPIC_URL, 'myData=' + JSON.stringify(postdata), function (data) {
+            alert('Topic posted successfully');
             console.log('Topic submitted successfully. ' + JSON.stringify(data));
         }).fail(function (data) {
             console.error('Failed to submit the topic.');
@@ -304,9 +308,10 @@ $('#_othercontrolls').load("othercontrols.html", function (data) {
 
 
 var topicsTimer;
+var g_topicsCount = 0;
 var topicsDataPrepared = false;
 function verifyTopicsLoaded(self) {
-    if (topicsDataPrepared === true) {
+    if (topicsDataPrepared === true || g_topicsCount >=10) {
         topicsMainModel.loadTopicsForPage(1);
         loadTopicsMainPage();
     } else {

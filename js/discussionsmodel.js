@@ -59,6 +59,7 @@ function TopicDetails() {
             'marked_by_admin': '0'};
         $.post(POST_DISCUSSION_URL, 'myData=' + JSON.stringify(detail), function (data) {
             console.log('Discussion posted to server. ' + JSON.stringify(data));
+            alert('Discussion posted successfully');
         }).fail(function (data) {
             console.error('Failed to post discussion to server.');
         });

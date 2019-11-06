@@ -30,6 +30,7 @@ function myencode(mystring) {
 //    return mystring.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
     return mystring.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/\\&quot;/g, '"');
 }
+
 function addslashes( str ) {  
     // Escapes single quote, double quotes and backslash characters in a string with backslashes    
     //   
