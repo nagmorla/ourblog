@@ -120,7 +120,7 @@ function TopicDetails() {
                 console.log('Discussions pulled from real target::' + data.length);
                 var detail;
                 $.each(data, function (index, value) {
-                    detail = {'discussion_id': value.discussion_id, 'topic_id': value.topic_id, 'type': value.type, 'written_by': value.written_by, 'discussion_ref_id': value.discussion_ref_id, 'details': value.details, 'marked_by_admin': value.marked_by_admin, 'discussion_date': value.creation_date
+                    detail = {'discussion_id': value.discussion_id, 'topic_id': value.topic_id, 'type': value.type, 'written_by': value.created_by, 'discussion_ref_id': value.discussion_ref_id, 'details': value.details, 'marked_by_admin': value.marked_by_admin, 'discussion_date': value.creation_date
                         , innerDetails: []};
                     self.tmpdetails.push(detail);
                 });
