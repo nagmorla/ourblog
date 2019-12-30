@@ -55,7 +55,7 @@ function TopicDetails() {
 
         detail = {'topic_id': self.topic_id(), 'type': type.toUpperCase(),
             'created_by': encodeURIComponent(loginUser), 'discussion_ref_id': _replyDiscussionId,
-            'details': replyContent,
+            'details': encodeURIComponent(replyContent),
             'marked_by_admin': '0'};
         $.post(POST_DISCUSSION_URL, 'myData=' + JSON.stringify(detail), function (data) {
             console.log('Discussion posted to server. ' + JSON.stringify(data));
@@ -120,9 +120,7 @@ function TopicDetails() {
                 console.log('Discussions pulled from real target::' + data.length);
                 var detail;
                 $.each(data, function (index, value) {
-                   // detail = {'discussion_id': value.discussion_id, 'topic_id': value.topic_id, 'type': value.type, 'written_by': value.created_by, 'discussion_ref_id': value.discussion_ref_id, 'details': value.details, 'marked_by_admin': value.marked_by_admin, 'discussion_date': value.creation_date
-                     //   , innerDetails: []};
-                     detail = {'discussion_id': value.discussion_id,
+                    detail = {'discussion_id': value.discussion_id,
                         'topic_id': value.topic_id,
                         'type': value.type,
                         'written_by': value.created_by,
@@ -132,8 +130,8 @@ function TopicDetails() {
                         'discussion_date': value.creation_date
                         , innerDetails: []};
                     self.tmpdetails.push(detail);
-                     
-                    //self.tmpdetails.push(detail);
+//                    console.log('HTML encoded...'+myencode(value.details));
+//                    console.log('HTML encoded...'+(value.details));
                 });
             }
             detailsDataPrepared = true;

@@ -1,11 +1,14 @@
 <?php
 
-$blogtitle = "Blog Title";
+$blogtitle = "Ravindrababu |Ravula Blog";
 $blogheading = "Blog Heading";
 //            echo 'Hai this is my first php application';
 session_start();
-$_SESSION['username'] = "ARUN";
-$_SESSION['login_complete'] = "1";
+//session_destroy();
+//session_commit();
+
+//$_SESSION['username'] = "ARUN";
+//$_SESSION['login_complete'] = "1";
 $_SESSION['admin_user'] = "0";
 
 $username = "";

@@ -61,7 +61,7 @@ function HomeModel() {
 //    return this.firstName() + " " + this.lastName();
 //}, this);
 
-    
+
     self.pullRealTopics = function () {
         $.getJSON(TOPICS_URL, function (data) {
             console.log('Topics pulled from real target::' + data.length);
@@ -311,7 +311,7 @@ var topicsTimer;
 var g_topicsCount = 0;
 var topicsDataPrepared = false;
 function verifyTopicsLoaded(self) {
-    if (topicsDataPrepared === true || g_topicsCount >=10) {
+    if (topicsDataPrepared === true || g_topicsCount >= 10) {
         topicsMainModel.loadTopicsForPage(1);
         loadTopicsMainPage();
     } else {
@@ -346,4 +346,47 @@ function loadTopicsMainPage() {
 
     });
 
+}
+
+
+function loginUser(obj) {
+    var userName = document.getElementById('email1').value;
+    var password = document.getElementById('exampleInputPassword1').value;
+    if (userName == undefined || userName == null) {
+        userName = '';
+    }
+    if (password == undefined || password == null) {
+        password = '';
+    }
+    console.log('UN::' + userName + ', PWD::' + password);
+    if (userName == '' || password == '') {
+        $('#loginErrors').show();
+        $('#loginErrors').html('Invalid username/password, please try again.');
+        return;
+    }
+    var postdata = JSON.parse('{}');
+    postdata.email = encodeURIComponent(userName);
+    postdata.pwd = encodeURIComponent(password);
+//        console.log('Posting.. ' + JSON.stringify(postdata));
+    $.post(LOGIN_URL, 'myData=' + JSON.stringify(postdata), function (data) {
+        var temp1 = JSON.stringify(data);
+        temp1 = temp1.replace(/\\"/g, '"');
+        temp1 = temp1.replace(/"{/g, '{');
+        temp1 = temp1.replace(/}"/g, '}');
+//        console.log('User login successfully. ' + JSON.stringify(data));
+//        console.log(temp1);
+        var temp2 = JSON.parse(temp1);
+//        console.log('User login successfully. ' + JSON.stringify(temp2));
+        if (temp2['status'] == 'success') {
+            window.location = 'index.php';
+        } else {
+            console.error('Invalid login');
+        }
+    }).fail(function (data) {
+        console.error('Failed to submit the topic.');
+    });
+}
+
+function passwordKeyup() {
+    $('#loginErrors').hide();
 }

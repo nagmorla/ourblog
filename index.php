@@ -30,7 +30,10 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><?php echo $blogheading; ?></a>
+                    <!--<a class="navbar-brand" href="#">
+                        //<?php echo $blogheading; ?>
+                    </a>-->
+                    <a class="navbar-brand" href="index.php"><img src="css/images/logo-color-1.png" style="    height: 100%;    width: 80%;"/></a>
                 </div>
                 <!--                <ul class="nav navbar-nav">
                                     <li class="active"><a data-toggle="tab" href="#home_div">Home</a></li>
