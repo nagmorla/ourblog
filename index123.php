@@ -1,4 +1,4 @@
-<?php include("session_data1.php"); ?>
+<?php include("session_data.php"); ?>
 <!DOCTYPE html>
 <html>
     <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
