@@ -380,6 +380,8 @@ function loginUser(obj) {
         if (temp2['status'] == 'success') {
             window.location = 'index.php';
         } else {
+            $('#loginErrors').show();
+            $('#loginErrors').html('Invalid username/password, please try again.');
             console.error('Invalid login');
         }
     }).fail(function (data) {
