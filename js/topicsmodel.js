@@ -378,7 +378,7 @@ function loginUser(obj) {
         var temp2 = JSON.parse(temp1);
 //        console.log('User login successfully. ' + JSON.stringify(temp2));
         if (temp2['status'] == 'success') {
-            window.location = 'index.php';
+            window.location = 'redirect.php?rparam='+temp2['redirect_param'];
         } else {
             $('#loginErrors').show();
             $('#loginErrors').html('Invalid username/password, please try again.');
@@ -387,6 +387,78 @@ function loginUser(obj) {
     }).fail(function (data) {
         console.error('Failed to submit the topic.');
     });
+}
+
+function logoutUser(obj){
+	
+	//alert('In Logout');
+	
+	$.post(LOGOUT_URL, function (data) {
+		console.log(data);
+		 window.location = 'redirect.php?rparam='+data;
+           
+        
+    }).fail(function () {
+        console.error('Failed to logout ');
+    });
+	
+	
+}
+function regUser(obj){
+	
+	
+	  var regName = document.getElementById('regname').value;
+    var regPassword = document.getElementById('regpwd').value;
+	var regMobile = document.getElementById('regmobile').value;
+	var regEmail = document.getElementById('regmail').value;
+    if (regName == undefined || regName == null) {
+        regName = '';
+    }
+    if (regPassword == undefined || regPassword == null) {
+        regPassword = '';
+    }
+	if (regMobile == undefined || regMobile == null) {
+        regMobile = '';
+    }
+	if (regEmail == undefined || regEmail == null) {
+        regEmail = '';
+    }
+    //console.log('UN::' + userName + ', PWD::' + password);
+    if (regName == '' || regPassword == '' || regMobile == '' || regEmail == '') {
+        $('#regErrors').show();
+        $('#regErrors').html('Please fill all the fields.');
+        return;
+    }
+   var postdata = JSON.parse('{}');
+    postdata.first_name = encodeURIComponent(regName);
+    postdata.password = encodeURIComponent(regPassword);
+	postdata.phone_number = encodeURIComponent(regMobile);
+	postdata.usr_email = encodeURIComponent(regEmail);
+//        console.log('Posting.. ' + JSON.stringify(postdata));
+    $.post(REG_URL, 'myData=' + JSON.stringify(postdata), function (data) {
+        var temp1 = JSON.stringify(data);
+        temp1 = temp1.replace(/\\"/g, '"');
+        temp1 = temp1.replace(/"{/g, '{');
+        temp1 = temp1.replace(/}"/g, '}');
+//        console.log('User login successfully. ' + JSON.stringify(data));
+//        console.log(temp1);
+        var temp2 = JSON.parse(temp1);
+//        console.log('User login successfully. ' + JSON.stringify(temp2));
+        if (temp2['status'] == 'exists') {
+			 $('#regErrors').show();
+            $('#regErrors').html('Error, User Already Exists.');
+            
+        } else if(temp2['status'] == 'success'){
+			window.location = 'redirect.php?rparam='+temp2['redirect_param'];
+		}else{
+            $('#regErrors').show();
+            $('#regErrors').html('Error, please try again.');
+            console.error('Invalid login');
+        }
+    }).fail(function (data) {
+        console.error('Failed to submit the topic.');
+    });
+	
 }
 
 function passwordKeyup() {

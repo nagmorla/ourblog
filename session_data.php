@@ -9,7 +9,7 @@ session_start();
 
 //$_SESSION['username'] = "ARUN";
 //$_SESSION['login_complete'] = "1";
-$_SESSION['admin_user'] = "0";
+//$_SESSION['admin_user'] = "0";
 
 $username = "";
 $loginComplete = 0;
