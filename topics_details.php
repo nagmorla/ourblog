@@ -128,7 +128,14 @@
             <BR>
             <label for="topic_detail_feedback">Comment:</label>
             <textarea id="topic_detail_feedback" class="form-control" ></textarea>
-            <button type="button" class="btn btn-primary" data-bind="click: submitReply" style="margin-left: 93%; margin-top: 10px;">Submit</button>
+            <div style="margin-top: 1%;">
+                <div style="width: 75%; display: inline-block;">
+                    <label style="font-style: italic; color: blue; font-weight: 500;">Note: You can drag & drop images in the editor.</label> 
+                </div>
+                <div style="width: 19%; display: inline-block; float: right;">
+                    <button type="button" class="btn btn-primary" data-bind="click: submitReply" style="float: right;">Submit</button>
+                </div>
+            </div>
         </div>
 
         <?php

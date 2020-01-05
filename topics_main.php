@@ -57,7 +57,16 @@
             <BR>
             <label for="new_topic">Topic Content:</label>
             <textarea id="new_topic"></textarea>
-            <button type="button" class="btn btn-primary" data-bind="click: submitPost" style="margin-left: 93%; margin-top: 10px;">Submit</button>
+
+            <div style="margin-top: 1%;">
+                <div style="width: 75%; display: inline-block;">
+                    <label style="font-style: italic; color: blue; font-weight: 500;">Note: You can drag & drop images in the editor.</label> 
+                </div>
+                <div style="width: 19%; display: inline-block; float: right;">
+                    <button type="button" class="btn btn-primary" data-bind="click: submitPost" style="float: right;">Submit</button>
+                </div>
+            </div>
+
         </div>
         <?php
     } else {

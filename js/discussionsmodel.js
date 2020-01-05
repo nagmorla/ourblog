@@ -169,6 +169,9 @@ function TopicDetails() {
 
 }
 
+function myCustomFileBrowser(field_name, url, type, win) {
+    console.log('Image browsed...' + field_name + ', ' + url + ', ' + type + ', ' + win);
+}
 var topicDetailsModel = new TopicDetails();
 
 var detailsDataPrepared = false;
@@ -179,11 +182,14 @@ function loadTopicDetailsPage() {
             tinyMCE.execCommand('mceRemoveEditor', false, 'topic_detail_feedback');
             setTimeout(function () {
                 tinymce.init({selector: '#topic_detail_feedback',
-                    plugins: "image,paste",
+                    plugins: "image paste link imagetools",
                     height: 300,
-                    toolbar: "image,paste",
+                    toolbar: "bold italic underline link",
                     paste_data_images: true,
-                    menubar: ["file", "edit", "view", "insert"]
+//                    menubar: ["file", "edit", "view", "insert"]
+                    menubar: false
+//                    ,toolbar1: "bold italic underline link"
+//                    ,file_browser_callback: myCustomFileBrowser
                 });
             }, 2000);
 

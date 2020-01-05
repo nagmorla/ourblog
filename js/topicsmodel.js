@@ -205,6 +205,9 @@ function HomeModel() {
     };
 
     self.gotoTopic = function (data) {
+        sessionStorage.last_topic = JSON.stringify(data);
+        console.log('Browser session data is saved.');
+        createPageHistoryCookie();
         $('#topic_details').show();
         $('#Home_Screen').hide();
         topicDetailsModel.addTopic(data);
@@ -330,11 +333,12 @@ function loadTopicsMainPage() {
         console.log('Topics main page is loaded into page.');
         try {
             tinymce.init({selector: '#new_topic',
-                plugins: "image,paste",
+                plugins: "image paste link imagetools",
                 height: 300,
-                toolbar: "image,paste",
+                toolbar: "bold italic underline link",
                 paste_data_images: true,
-                menubar: ["file", "edit", "view", "insert"]
+//                menubar: ["file", "edit", "view", "insert"]
+                menubar: false
             });
             console.log('TinyMCE is initialized for new post creation');
         } catch (exp) {
@@ -343,7 +347,7 @@ function loadTopicsMainPage() {
         console.log('Applying Bindings to Home Screen');
         ko.applyBindings(topicsMainModel, document.getElementById('topics_column'));
         console.log('Bindings Applied to Home Screen');
-
+        checkHistoryAndLoadDiscussion();
     });
 
 }
@@ -378,7 +382,7 @@ function loginUser(obj) {
         var temp2 = JSON.parse(temp1);
 //        console.log('User login successfully. ' + JSON.stringify(temp2));
         if (temp2['status'] == 'success') {
-            window.location = 'redirect.php?rparam='+temp2['redirect_param'];
+            window.location = 'redirect.php?rparam=' + temp2['redirect_param'];
         } else {
             $('#loginErrors').show();
             $('#loginErrors').html('Invalid username/password, please try again.');
@@ -389,38 +393,38 @@ function loginUser(obj) {
     });
 }
 
-function logoutUser(obj){
-	
-	//alert('In Logout');
-	
-	$.post(LOGOUT_URL, function (data) {
-		console.log(data);
-		 window.location = 'redirect.php?rparam='+data;
-           
-        
+function logoutUser(obj) {
+
+    //alert('In Logout');
+
+    $.post(LOGOUT_URL, function (data) {
+        console.log(data);
+        window.location = 'redirect.php?rparam=' + data;
+
+
     }).fail(function () {
         console.error('Failed to logout ');
     });
-	
-	
+
+
 }
-function regUser(obj){
-	
-	
-	  var regName = document.getElementById('regname').value;
+function regUser(obj) {
+
+
+    var regName = document.getElementById('regname').value;
     var regPassword = document.getElementById('regpwd').value;
-	var regMobile = document.getElementById('regmobile').value;
-	var regEmail = document.getElementById('regmail').value;
+    var regMobile = document.getElementById('regmobile').value;
+    var regEmail = document.getElementById('regmail').value;
     if (regName == undefined || regName == null) {
         regName = '';
     }
     if (regPassword == undefined || regPassword == null) {
         regPassword = '';
     }
-	if (regMobile == undefined || regMobile == null) {
+    if (regMobile == undefined || regMobile == null) {
         regMobile = '';
     }
-	if (regEmail == undefined || regEmail == null) {
+    if (regEmail == undefined || regEmail == null) {
         regEmail = '';
     }
     //console.log('UN::' + userName + ', PWD::' + password);
@@ -429,11 +433,11 @@ function regUser(obj){
         $('#regErrors').html('Please fill all the fields.');
         return;
     }
-   var postdata = JSON.parse('{}');
+    var postdata = JSON.parse('{}');
     postdata.first_name = encodeURIComponent(regName);
     postdata.password = encodeURIComponent(regPassword);
-	postdata.phone_number = encodeURIComponent(regMobile);
-	postdata.usr_email = encodeURIComponent(regEmail);
+    postdata.phone_number = encodeURIComponent(regMobile);
+    postdata.usr_email = encodeURIComponent(regEmail);
 //        console.log('Posting.. ' + JSON.stringify(postdata));
     $.post(REG_URL, 'myData=' + JSON.stringify(postdata), function (data) {
         var temp1 = JSON.stringify(data);
@@ -445,12 +449,12 @@ function regUser(obj){
         var temp2 = JSON.parse(temp1);
 //        console.log('User login successfully. ' + JSON.stringify(temp2));
         if (temp2['status'] == 'exists') {
-			 $('#regErrors').show();
+            $('#regErrors').show();
             $('#regErrors').html('Error, User Already Exists.');
-            
-        } else if(temp2['status'] == 'success'){
-			window.location = 'redirect.php?rparam='+temp2['redirect_param'];
-		}else{
+
+        } else if (temp2['status'] == 'success') {
+            window.location = 'redirect.php?rparam=' + temp2['redirect_param'];
+        } else {
             $('#regErrors').show();
             $('#regErrors').html('Error, please try again.');
             console.error('Invalid login');
@@ -458,7 +462,7 @@ function regUser(obj){
     }).fail(function (data) {
         console.error('Failed to submit the topic.');
     });
-	
+
 }
 
 function passwordKeyup() {

@@ -15,6 +15,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 function gotoMain() {
     $('#topic_details').hide();
     $('#Home_Screen').show();
+    deletePageHistoryCookie();
 }
 
 
@@ -31,7 +32,7 @@ function myencode(mystring) {
     return mystring.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/\\&quot;/g, '"');
 }
 
-function addslashes( str ) {  
+function addslashes(str) {
     // Escapes single quote, double quotes and backslash characters in a string with backslashes    
     //   
     // version: 810.114  
@@ -43,6 +44,44 @@ function addslashes( str ) {
     // +   improved by: Onno Marsman  
     // *     example 1: addslashes("kevin's birthday");  
     // *     returns 1: 'kevin\'s birthday'  
-   
-    return (str+'').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");  
-}  
+
+    return (str + '').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");
+}
+
+
+
+function createPageHistoryCookie() {
+    var cookieDate = new Date();
+    cookieDate.setTime(cookieDate.getTime() + (1 * 1000 * 60 * 60 * 24));
+    var expires = "expires=" + cookieDate.toGMTString(); //Compose the expirartion date
+    window.document.cookie = 'enter_discussion=yes;' + expires;
+}
+
+function checkHistoryAndLoadDiscussion() {
+    var enterDiscussionCookieVal = '';
+    var enterDiscussionCookie = "enter_discussion=";
+    var cArr = window.document.cookie.split(';');
+    for (var i = 0; i < cArr.length; i++) {
+        var c = cArr[i].trim();
+        console.log('Browser cookie:' + c);
+        if (c.indexOf(enterDiscussionCookie) == 0) {
+            enterDiscussionCookieVal = c.substring(enterDiscussionCookie.length, c.length);
+            console.log('Enter Discussion Cookie Value:' + enterDiscussionCookieVal);
+            break;
+        }
+    }
+    if (enterDiscussionCookieVal == 'yes') {
+        $('#topic_details').show();
+        $('#Home_Screen').hide();
+        topicDetailsModel.addTopic(JSON.parse(sessionStorage.last_topic));
+    }
+}
+
+function deletePageHistoryCookie() {
+    var cookieExpiryDate = new Date();
+    cookieExpiryDate.setTime(cookieExpiryDate.getTime() - (1000 * 60 * 60 * 24));
+    var expires = "expires=" + cookieExpiryDate.toGMTString();
+    var enterDiscussionCookie = "enter_discussion=";
+    window.document.cookie = enterDiscussionCookie + "=" + "; " + expires;
+    console.log('Enter Discussion Cookie Deleted');
+}
