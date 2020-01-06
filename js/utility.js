@@ -85,3 +85,15 @@ function deletePageHistoryCookie() {
     window.document.cookie = enterDiscussionCookie + "=" + "; " + expires;
     console.log('Enter Discussion Cookie Deleted');
 }
+
+//function loadUserNotifications() {
+//    var postdata = JSON.parse('{}');
+//    var email = document.getElementById('login_user_email').value;
+//    postdata.email = encodeURIComponent(email);
+//    $.post(GET_NOTIFICATIONS, 'myData=' + JSON.stringify(postdata), function (data) {
+//        console.log(JSON.stringify(data));
+//
+//    }).fail(function (data) {
+//        console.error('Failed to load notifications.');
+//    });
+//}

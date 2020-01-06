@@ -58,6 +58,7 @@
     </head>
     <body>
         <input type="hidden" id="login_user" name="login_user" value="<?= $username ?>"/>
+        <input type="hidden" id="login_user_email" name="login_user_email" value="<?= $useremail ?>"/>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -72,7 +73,7 @@
                     <?php
                     if ($loginComplete == "1") {
                         ?>
-                            <!--                        <li><a href="#"><?php echo $username; ?></a></li>-->
+                                                            <!--                        <li><a href="#"><?php echo $username; ?></a></li>-->
                         <li><a href="#askQuestion">Ask Question</a></li>
                         <li style="margin-top: 8px;">
                             <div class="dropdown">
@@ -82,6 +83,39 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#" onclick="logoutUser(this)">Logout</a>
                                 </div>
+                            </div>
+                        </li>
+                        <li id="user_notifications" style="margin-top: 14px; margin-right: 20px;">
+                            <div class="dropdown" id="notdropdowndiv">
+                                <a id="dLabel" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" style="color: yellow; cursor: pointer;">
+                                    <i class="glyphicon glyphicon-bell"><label style="color:red;" data-bind="text:notCount">12</label></i>
+                                </a>
+
+                                <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel" style="width: 200px;">
+
+                                    <div class="notification-heading"><h4 class="menu-title">Notifications</h4></div>
+                                    <li class="divider"></li>
+                                    <div class="notifications-wrapper">
+
+                                        <!--                                        <a class="content" href="#">
+                                                                                        <div class="notification-item">
+                                                                                            <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+                                                                                            <p class="item-info">Marketing 101, Video Assignment</p>
+                                                                                        </div>
+                                                                                    </a>-->
+
+                                        <div data-bind="foreach: {data: notifications}" class="notification_detail">
+                                            <a class="content" href="#">
+                                                <div class="notification-item">
+                                                    <h4 class="item-title" data-bind="text: type"></h4>
+                                                    <p class="item-info" data-bind="text: data"></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <li class="divider"></li>
+                                    <!--<div class="notification-footer"><h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>-->
+                                </ul>
                             </div>
                         </li>
                         <?php
@@ -113,7 +147,7 @@
             <div id="topic_details" style="margin-top: 3%; display: none;">
 
             </div>
-          
+
         </div>        
 
         <script src="https://cdn.tiny.cloud/1/9ko0ik0t36r5i3bne9h3j1w63jwm10tml8lhqoa51s85orm5/tinymce/5/tinymce.min.js"></script>
@@ -182,7 +216,7 @@
                                     </div>
                                     <div class="tab-pane" id="Registration">
                                         <form role="form" class="form-horizontal">
-										<div style="display: none; text-align: center; color: red; margin: 5px;" id="regErrors"></div>
+                                            <div style="display: none; text-align: center; color: red; margin: 5px;" id="regErrors"></div>
                                             <div class="form-group">
                                                 <label for="email" class="col-sm-2 control-label">
                                                     Name</label>

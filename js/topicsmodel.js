@@ -303,6 +303,45 @@ topicsMainModel.pullCatogories();
 
 verifyTopicsLoaded(topicsMainModel);
 
+function NotificationsModel() {
+//    $('.dropdown').on('hide.bs.dropdown', function (event) {
+//        console.log('Div Closed');
+//    });
+
+    $(".dropdown").on("hide.bs.dropdown", function (event) {
+        var x = $(event.relatedTarget).text(); // Get the button text
+        alert("You clicked on: " + x);
+    });
+
+    console.log('Notifications menu drop down events bind...');
+//    $('#dLabel').on('hide.bs.dropdown', function (event) {
+//        console.log('A Closed');
+//    });
+
+    var self = this;
+    self.notifications = ko.observableArray([]);
+    self.notCount = ko.observable();
+    self.loadNotifications = function () {
+        var postdata = JSON.parse('{}');
+        var email = document.getElementById('login_user_email').value;
+        postdata.email = encodeURIComponent(email);
+        $.post(GET_NOTIFICATIONS, 'myData=' + JSON.stringify(postdata), function (data) {
+            console.log(JSON.stringify(data));
+            var data1 = JSON.parse(data);
+            self.notCount(data1.length);
+            $.each(data1, function (index, value) {
+                self.notifications.push({id: value.id, data: value.data, type: value.type});
+            });
+        }).fail(function (data) {
+            console.error('Failed to load notifications.');
+        });
+    };
+}
+
+var notificaionModel = new NotificationsModel();
+notificaionModel.loadNotifications();
+ko.applyBindings(notificaionModel, document.getElementById('user_notifications'));
+
 $('#_othercontrolls').load("othercontrols.html", function (data) {
     console.log('Other controlls also loaded into page.');
     ko.applyBindings(topicsMainModel, document.getElementById('_othercontrolls'));
