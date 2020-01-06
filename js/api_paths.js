@@ -15,6 +15,7 @@ var LOGIN_URL = 'http://qna.ravindrababuravula.com/s/c/CommonCtrl.php/checklogin
 var LOGOUT_URL = 'http://qna.ravindrababuravula.com/s/c/CommonCtrl.php/logout';
 var REG_URL = 'http://qna.ravindrababuravula.com/s/c/CommonCtrl.php/registration';
 var GET_NOTIFICATIONS = 'http://qna.ravindrababuravula.com/s/c/CommonCtrl.php/getnotifications';
+var CLEAR_NOTIFICATIONS = 'http://qna.ravindrababuravula.com/s/c/CommonCtrl.php/clearnotifications';
 //var TOPICS_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/getalltopics';
 //var CATEGORIES_URL = 'http://bethelinfotech.com/vcmspro/s/c/CommonCtrl.php/getallcategories';
 //var DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/gettopicdisscbyid?tid={tid}';
@@ -22,3 +23,6 @@ var GET_NOTIFICATIONS = 'http://qna.ravindrababuravula.com/s/c/CommonCtrl.php/ge
 //var GET_TOPIC_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/gettopicbyid?tid={tid}';
 //var MARK_DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/admin_ctrl.php/markbyadmin';
 //var POST_DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/postdiscussion';
+
+//constants
+var discussion_load_interval=20000;

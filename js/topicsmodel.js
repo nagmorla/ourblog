@@ -96,98 +96,6 @@ function HomeModel() {
         });
     };
 
-    self.pullTopics = function () {
-        var topic = {'topic_id': '27', 'subject': 'Artificial Inteligence :: Robot is very dangorous',
-            'category': 'DataScience',
-            'content': 'A robot is a machine—especially one programmable by a computer— capable of carrying out a complex series of actions automatically. ',
-            't_day': '12',
-            't_mon': 'Sep',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-
-        topic = {'topic_id': '36', 'subject': 'Machine Learning:: Linear regression is difficult to understand',
-            'category': 'MachineLearning',
-            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-            't_day': '13',
-            't_mon': 'Sep',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-
-        topic = {'topic_id': '37', 'subject': 'Machine Learning:: Linear regression 2',
-            'category': 'Hadoop',
-            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-            't_day': '14',
-            't_mon': 'Sep',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-
-        topic = {'topic_id': '38', 'subject': 'Machine Learning:: Linear regression 3',
-            'category': 'DataScience',
-            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-            't_day': '15',
-            't_mon': 'Sep',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-
-        topic = {'topic_id': '39', 'subject': 'Machine Learning:: Linear regression 4',
-            'category': 'Spark',
-            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-            't_day': '18',
-            't_mon': 'Sep',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-
-        topic = {'topic_id': '40', 'subject': 'Machine Learning:: Linear regression 5',
-            'category': 'MachineLearning',
-            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-            't_day': '19',
-            't_mon': 'Oct',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-
-        topic = {'topic_id': '41', 'subject': 'Machine Learning:: Linear regression 6',
-            'category': 'DataScience',
-            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-            't_day': '15',
-            't_mon': 'Sep',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-
-        topic = {'topic_id': '42', 'subject': 'Machine Learning:: Linear regression 7',
-            'category': 'Spark',
-            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-            't_day': '18',
-            't_mon': 'Sep',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-
-        topic = {'topic_id': '43', 'subject': 'Machine Learning:: Linear regression 8',
-            'category': 'MachineLearning',
-            'content': 'Make better decisions utilizing linear regression techniques. Learn more today. Leverage IBM® SPSS for simple linear regression. ',
-            't_day': '19',
-            't_mon': 'Oct',
-            't_year': '2019'
-        };
-        self.masterTopics.push(topic);
-        self.categorizedTopics.push(topic);
-    };
-
     self.pullCatogories = function () {
 //        self.categories.push({'key': 'DataScience', 'value': 'Data Science'});
 //        self.categories.push({'key': 'MachineLearning', 'value': 'Machine Learning'});
@@ -203,7 +111,7 @@ function HomeModel() {
             });
         });
     };
-
+    
     self.gotoTopic = function (data) {
         sessionStorage.last_topic = JSON.stringify(data);
         console.log('Browser session data is saved.');
@@ -308,12 +216,9 @@ function NotificationsModel() {
 //        console.log('Div Closed');
 //    });
 
-    $(".dropdown").on("hide.bs.dropdown", function (event) {
-        var x = $(event.relatedTarget).text(); // Get the button text
-        alert("You clicked on: " + x);
-    });
+    $(".dropdown").on("hide.bs.dropdown", clearNotifications);
 
-    console.log('Notifications menu drop down events bind...');
+    console.log('Notifications menu drop down events bind13124');
 //    $('#dLabel').on('hide.bs.dropdown', function (event) {
 //        console.log('A Closed');
 //    });

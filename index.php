@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>-->
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!--        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>-->
         <script type="text/javascript" src="js/knockout-3.5.0.js"></script>
         <!-- Favicon -->
         <link rel="shortcut icon" href="css/images/favicon.ico">
@@ -73,7 +73,7 @@
                     <?php
                     if ($loginComplete == "1") {
                         ?>
-                                                            <!--                        <li><a href="#"><?php echo $username; ?></a></li>-->
+                                                                <!--                        <li><a href="#"><?php echo $username; ?></a></li>-->
                         <li><a href="#askQuestion">Ask Question</a></li>
                         <li style="margin-top: 8px;">
                             <div class="dropdown">
@@ -86,8 +86,8 @@
                             </div>
                         </li>
                         <li id="user_notifications" style="margin-top: 14px; margin-right: 20px;">
-                            <div class="dropdown" id="notdropdowndiv">
-                                <a id="dLabel" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" style="color: yellow; cursor: pointer;">
+                            <div class="dropdown">
+                                <a id="dLabel" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" style="color: yellow; cursor: pointer;background: none;">
                                     <i class="glyphicon glyphicon-bell"><label style="color:red;" data-bind="text:notCount">12</label></i>
                                 </a>
 
@@ -152,10 +152,10 @@
 
         <script src="https://cdn.tiny.cloud/1/9ko0ik0t36r5i3bne9h3j1w63jwm10tml8lhqoa51s85orm5/tinymce/5/tinymce.min.js"></script>
         <!--<script type="text/javascript" src="js/komain.js"></script>-->
+        <script type="text/javascript" src="js/utility.js"></script>
         <script type="text/javascript" src="js/api_paths.js"></script>
         <script type="text/javascript" src="js/topicsmodel.js"></script>
         <script type="text/javascript" src="js/discussionsmodel.js"></script>
-        <script type="text/javascript" src="js/utility.js"></script>
         <script>
 //            tinymce.init({selector: '#topic_detail_feedback',
 //                plugins: "image",

@@ -12,9 +12,11 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     gotoMain();
 });
 
+var discussionLoadIntervalObject;
 function gotoMain() {
     $('#topic_details').hide();
     $('#Home_Screen').show();
+    window.clearInterval(discussionLoadIntervalObject);
     deletePageHistoryCookie();
 }
 
@@ -97,3 +99,28 @@ function deletePageHistoryCookie() {
 //        console.error('Failed to load notifications.');
 //    });
 //}
+
+function clearNotifications(event) {
+//        event.preventDefault();
+    var textOfDropDown = $(event.relatedTarget).text();
+    var clearedNotifications = notificaionModel.notifications();
+    var totalNotifications = notificaionModel.notCount();
+    var noti = [];
+    if (totalNotifications == undefined || totalNotifications == '' || totalNotifications == 0) {
+        return;
+    }
+    console.log('Clearing notifications');
+    for (var i = 0; i < totalNotifications; i++) {
+        noti.push(clearedNotifications[i].id);
+    }
+
+    notificaionModel.notifications.removeAll();
+    notificaionModel.notCount('');
+    var postdata = JSON.parse('{}');
+    postdata.ids = noti;
+    $.post(CLEAR_NOTIFICATIONS, 'myData=' + JSON.stringify(postdata), function (data) {
+        console.log(JSON.stringify(data));
+    }).fail(function (data) {
+        console.error('Failed to clear notifications.');
+    });
+}

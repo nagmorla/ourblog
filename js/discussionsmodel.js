@@ -6,17 +6,15 @@ function TopicDetails() {
     self.tmpdetails = [];
     self.topic_id = ko.observable();
     self.maxDescussionId = 1;
-
     self.addTopic = function (topic) {
         self.topics.removeAll();
         self.topics.push(topic);
-        self.topic_id(topic.topic_id);
+        var tid = topic.topic_id;
+        self.topic_id(tid);
         self.tmpdetails = [];
         detailsDataPrepared = false;
-//        var currentDescId = self.pullDetails(topic.topic_id);
-//        self.maxDescussionId = currentDescId + 1;
-//        console.log('currentDescId == ' + currentDescId);
-        self.pullRealDetails(topic.topic_id);
+        pullRealDetails(tid);
+        discussionLoadIntervalObject = window.setInterval(pullRealDetails.bind(null, tid), discussion_load_interval);
         verifyDetailsLoaded(self);
     };
 
@@ -66,78 +64,6 @@ function TopicDetails() {
     };
 
 
-    self.pullDetails = function (id) {
-        console.log('Pulling details for topic ... ' + id);
-        var detailsId = 0;
-        var detail;
-        detail = {'discussion_id': '2002', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Soumya Rathod', 'discussion_ref_id': '',
-            'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.<br>Form controls automatically receive some global styling with Bootstrap: All textual &lt;input&gt;, &lt;textarea&gt;, and &lt;select&gt; elements with class .form-control have a width of 100%.',
-            'marked_by_admin': '0', 'discussion_date': '2019-09-17'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2003', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Mangulya Rathod', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-18'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2004', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Sarath Yadhav', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '1', 'discussion_date': '2019-09-19'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2005', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Chilboo Pandye', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-22'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2006', 'topic_id': id, 'type': 'QUESTION', 'written_by': 'Shankar Deva', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-23'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2007', 'topic_id': id, 'type': 'FEEDBACK', 'written_by': 'Ayodhya Kumari', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '1', 'discussion_date': '2019-09-17'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2008', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Soumya Rathod', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-20'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2009', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Shahanaz Keriz', 'discussion_ref_id': '', 'details': 'This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-17'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detailsId = detail.discussion_id;
-        detail = {'discussion_id': '2010', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Nagaraj Patoudi', 'discussion_ref_id': '2002', 'details': 'Inner Details, This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-20'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detail = {'discussion_id': '2011', 'topic_id': id, 'type': 'REPLY', 'written_by': 'Nagaraj Patoudi', 'discussion_ref_id': '2002', 'details': 'Inner Details, This is testing content for this topic. When it goes to production, content will be modified and reliable.', 'marked_by_admin': '0', 'discussion_date': '2019-09-17'
-            , innerDetails: []};
-        self.tmpdetails.push(detail);
-        detailsDataPrepared = true;
-        return detailsId;
-    };
-
-    self.pullRealDetails = function (id) {
-        console.log('Pulling real details for topic ... ' + id);
-        var URL = DISCUSSION_URL;
-        URL = URL.replace(/{tid}/g, id);
-        console.log('URL::' + URL);
-        //replace(/&amp;/g, "&")
-        $.getJSON(URL, function (data) {
-            if (data == null || data == 'null') {
-                console.error('Discussions are not defined for topic:' + id);
-            } else {
-                console.log('Discussions pulled from real target::' + data.length);
-                var detail;
-                $.each(data, function (index, value) {
-                    detail = {'discussion_id': value.discussion_id,
-                        'topic_id': value.topic_id,
-                        'type': value.type,
-                        'written_by': value.created_by,
-                        'discussion_ref_id': value.discussion_ref_id,
-                        'details': myencode(value.details),
-                        'marked_by_admin': value.marked_by_admin,
-                        'discussion_date': value.creation_date
-                        , innerDetails: []};
-                    self.tmpdetails.push(detail);
-//                    console.log('HTML encoded...'+myencode(value.details));
-//                    console.log('HTML encoded...'+(value.details));
-                });
-            }
-            detailsDataPrepared = true;
-        });
-    };
-
     self.rearrangeDetails = function (details) {
         console.log('Re-Arranging Details...');
         var childNodes = [];
@@ -167,6 +93,39 @@ function TopicDetails() {
         }
     };
 
+}
+
+
+function pullRealDetails(id) {
+    console.log('Pulling real details for topic ... ' + id);
+    var URL = DISCUSSION_URL;
+    URL = URL.replace(/{tid}/g, id);
+    console.log('URL::' + URL);
+    //replace(/&amp;/g, "&")
+    topicDetailsModel.tmpdetails = [];
+    $.getJSON(URL, function (data) {
+        if (data == null || data == 'null') {
+            console.error('Discussions are not defined for topic:' + id);
+        } else {
+            console.log('Discussions pulled from real target::' + data.length);
+            var detail;
+            $.each(data, function (index, value) {
+                detail = {'discussion_id': value.discussion_id,
+                    'topic_id': value.topic_id,
+                    'type': value.type,
+                    'written_by': value.created_by,
+                    'discussion_ref_id': value.discussion_ref_id,
+                    'details': myencode(value.details),
+                    'marked_by_admin': value.marked_by_admin,
+                    'discussion_date': value.creation_date
+                    , innerDetails: []};
+                topicDetailsModel.tmpdetails.push(detail);
+//                    console.log('HTML encoded...'+myencode(value.details));
+//                    console.log('HTML encoded...'+(value.details));
+            });
+        }
+        detailsDataPrepared = true;
+    });
 }
 
 function myCustomFileBrowser(field_name, url, type, win) {
@@ -205,6 +164,14 @@ function loadTopicDetailsPage() {
         applyTopicDetailsBinding();
     });
 }
+
+
+//var discussionLoadtimer;
+//function resetDiscussionLoadTimer() {
+//    console.log('Topic Details are not yet loaded ......');
+//    clearTimeout(discussionLoadtimer);
+//    discussionLoadtimer = setTimeout(verifyDetailsLoaded, 2000);
+//}
 
 var topicDetailsTimer;
 
