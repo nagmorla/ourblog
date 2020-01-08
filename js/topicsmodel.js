@@ -63,6 +63,7 @@ function HomeModel() {
 
 
     self.pullRealTopics = function () {
+        topicsDataPrepared = false;
         $.getJSON(TOPICS_URL, function (data) {
             console.log('Topics pulled from real target::' + data.length);
             var topic = '';
@@ -111,7 +112,7 @@ function HomeModel() {
             });
         });
     };
-    
+
     self.gotoTopic = function (data) {
         sessionStorage.last_topic = JSON.stringify(data);
         console.log('Browser session data is saved.');
@@ -215,36 +216,18 @@ function NotificationsModel() {
 //    $('.dropdown').on('hide.bs.dropdown', function (event) {
 //        console.log('Div Closed');
 //    });
-
     $(".dropdown").on("hide.bs.dropdown", clearNotifications);
 
-    console.log('Notifications menu drop down events bind13124');
-//    $('#dLabel').on('hide.bs.dropdown', function (event) {
-//        console.log('A Closed');
-//    });
-
+//    console.log('Notifications menu drop down events bind13124');
     var self = this;
     self.notifications = ko.observableArray([]);
     self.notCount = ko.observable();
-    self.loadNotifications = function () {
-        var postdata = JSON.parse('{}');
-        var email = document.getElementById('login_user_email').value;
-        postdata.email = encodeURIComponent(email);
-        $.post(GET_NOTIFICATIONS, 'myData=' + JSON.stringify(postdata), function (data) {
-            console.log(JSON.stringify(data));
-            var data1 = JSON.parse(data);
-            self.notCount(data1.length);
-            $.each(data1, function (index, value) {
-                self.notifications.push({id: value.id, data: value.data, type: value.type});
-            });
-        }).fail(function (data) {
-            console.error('Failed to load notifications.');
-        });
-    };
+
 }
 
 var notificaionModel = new NotificationsModel();
-notificaionModel.loadNotifications();
+loadNotifications();
+var notiLoadIntervalObject = window.setInterval(loadNotifications, notifications_load_interval);
 ko.applyBindings(notificaionModel, document.getElementById('user_notifications'));
 
 $('#_othercontrolls').load("othercontrols.html", function (data) {

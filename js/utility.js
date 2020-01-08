@@ -88,17 +88,21 @@ function deletePageHistoryCookie() {
     console.log('Enter Discussion Cookie Deleted');
 }
 
-//function loadUserNotifications() {
-//    var postdata = JSON.parse('{}');
-//    var email = document.getElementById('login_user_email').value;
-//    postdata.email = encodeURIComponent(email);
-//    $.post(GET_NOTIFICATIONS, 'myData=' + JSON.stringify(postdata), function (data) {
-//        console.log(JSON.stringify(data));
-//
-//    }).fail(function (data) {
-//        console.error('Failed to load notifications.');
-//    });
-//}
+function loadNotifications() {
+    var postdata = JSON.parse('{}');
+    var email = document.getElementById('login_user_email').value;
+    postdata.email = encodeURIComponent(email);
+    $.post(GET_NOTIFICATIONS, 'myData=' + JSON.stringify(postdata), function (data) {
+        console.log(JSON.stringify(data));
+        var data1 = JSON.parse(data);
+        notificaionModel.notCount(data1.length);
+        $.each(data1, function (index, value) {
+            notificaionModel.notifications.push({id: value.id, data: value.data, type: value.type});
+        });
+    }).fail(function (data) {
+        console.error('Failed to load notifications.');
+    });
+}
 
 function clearNotifications(event) {
 //        event.preventDefault();

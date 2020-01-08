@@ -25,4 +25,5 @@ var CLEAR_NOTIFICATIONS = 'http://qna.ravindrababuravula.com/s/c/CommonCtrl.php/
 //var POST_DISCUSSION_URL = 'http://bethelinfotech.com/vcmspro/s/c/TopicsCtrl.php/postdiscussion';
 
 //constants
-var discussion_load_interval=20000;
+var discussion_load_interval=60000;
+var notifications_load_interval=60000;

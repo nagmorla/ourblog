@@ -8,6 +8,7 @@ function TopicDetails() {
     self.maxDescussionId = 1;
     self.addTopic = function (topic) {
         self.topics.removeAll();
+        self.details.removeAll();
         self.topics.push(topic);
         var tid = topic.topic_id;
         self.topic_id(tid);
@@ -15,7 +16,7 @@ function TopicDetails() {
         detailsDataPrepared = false;
         pullRealDetails(tid);
         discussionLoadIntervalObject = window.setInterval(pullRealDetails.bind(null, tid), discussion_load_interval);
-        verifyDetailsLoaded(self);
+//        verifyDetailsLoaded(self);
     };
 
     self.descussionMarked = function (data, event) {
@@ -65,9 +66,8 @@ function TopicDetails() {
 
 
     self.rearrangeDetails = function (details) {
-        console.log('Re-Arranging Details...');
+//        console.log('Re-Arranging Details...' + JSON.stringify(details));
         var childNodes = [];
-        self.details.removeAll();
         for (var i = 0; i < details.length; i++) {
             var det = details[i];
             if (det.discussion_ref_id == '' || det.discussion_ref_id == undefined || det.discussion_ref_id == null || det.discussion_ref_id == '0') {
@@ -97,7 +97,14 @@ function TopicDetails() {
 
 
 function pullRealDetails(id) {
+    topicDetailsModel.details.removeAll();
+    pullDiscussions(id);
+    verifyDetailsLoaded();
+}
+
+function pullDiscussions(id) {
     console.log('Pulling real details for topic ... ' + id);
+    detailsDataPrepared = false;
     var URL = DISCUSSION_URL;
     URL = URL.replace(/{tid}/g, id);
     console.log('URL::' + URL);
@@ -125,6 +132,9 @@ function pullRealDetails(id) {
             });
         }
         detailsDataPrepared = true;
+        console.log('Discussions in temp array:' + topicDetailsModel.tmpdetails.length);
+//        applyTopicDetailsBinding();
+//        loadTopicDetailsPage();
     });
 }
 
@@ -175,7 +185,7 @@ function loadTopicDetailsPage() {
 
 var topicDetailsTimer;
 
-function verifyDetailsLoaded(self) {
+function verifyDetailsLoaded() {
     if (detailsDataPrepared == true) {
         topicDetailsModel.rearrangeDetails(topicDetailsModel.tmpdetails);
         loadTopicDetailsPage();

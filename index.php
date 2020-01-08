@@ -73,7 +73,7 @@
                     <?php
                     if ($loginComplete == "1") {
                         ?>
-                                                                <!--                        <li><a href="#"><?php echo $username; ?></a></li>-->
+                                                                        <!--                        <li><a href="#"><?php echo $username; ?></a></li>-->
                         <li><a href="#askQuestion">Ask Question</a></li>
                         <li style="margin-top: 8px;">
                             <div class="dropdown">
@@ -96,14 +96,9 @@
                                     <div class="notification-heading"><h4 class="menu-title">Notifications</h4></div>
                                     <li class="divider"></li>
                                     <div class="notifications-wrapper">
-
-                                        <!--                                        <a class="content" href="#">
-                                                                                        <div class="notification-item">
-                                                                                            <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                                                                                            <p class="item-info">Marketing 101, Video Assignment</p>
-                                                                                        </div>
-                                                                                    </a>-->
-
+                                        <!-- ko if: notifications().length == 0 -->
+                                        <div style="text-align: center; font-style: italic; font-weight: 500;">No notifications to display</div>
+                                        <!-- /ko -->
                                         <div data-bind="foreach: {data: notifications}" class="notification_detail">
                                             <a class="content" href="#">
                                                 <div class="notification-item">
